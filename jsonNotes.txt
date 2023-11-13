@@ -1,0 +1,5 @@
+fileType: ".recipebook"
+if it is a recipe, we expect the following:
+array of recipes
+	type of recipe: base, baking, grilling...
+	instance variables, with key the same as the variables in the class
