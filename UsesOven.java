@@ -7,4 +7,10 @@
  */
 public class UsesOven {
 
+public interface UsesOven {
+    boolean preheat = false;
+    boolean getPreheat();
+    void setPreheat(boolean preheat);
+}
+  
 }
