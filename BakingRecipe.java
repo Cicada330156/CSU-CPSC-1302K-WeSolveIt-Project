@@ -6,6 +6,16 @@
  * @version 1.0
  *
  */
-public class BakingRecipe {
+public class BakingRecipe extends Recipe implements UsesOven {
+    private boolean preheat;
+    private int ovenTemp;
+/**
+*this is where we use the getpreheat method to return preheat as a boolean
+*/
+  public boolean getPreheat() { return this.preheat; }
+   /**
+  * this is where we use the setPreheat boolean to cause the prheat to equal itself.
+  */
+  public void setPreheat(boolean preheat) { this.preheat = preheat; }
 
 }
