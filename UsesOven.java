@@ -8,11 +8,13 @@
 public class UsesOven {
 
 /**
-* We are using an interface to UsesOven for finding out the preheat.
+* We are using an interface to UsesOven for finding out the preheat with a boolean.
+*
+*/
 public interface UsesOven {
     boolean preheat = false;
     boolean getPreheat();
-    void setPreheat(boolean preheat);
+   void setPreheat(boolean preheat);
 }
   
 }
