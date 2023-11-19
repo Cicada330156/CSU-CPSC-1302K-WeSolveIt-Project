@@ -4,6 +4,8 @@
  * @author Ryan McKelphin
  *@version 1.0
  */
-public class GrillRecipe {
+public class GrillRecipe extends Recipe {
+    private boolean preheat;
+    private int grillTemp;
 
 }

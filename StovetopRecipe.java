@@ -3,6 +3,8 @@
  *@author Ryan McKelphin
  *@version 1.0
  */
-public class StovetopRecipe {
+public class StovetopRecipe extends Recipe {
+    private String temp;
+    private String potType;
 
 }
