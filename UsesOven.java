@@ -14,5 +14,5 @@ public interface UsesOven {
     boolean getPreheat();
     void setPreheat(boolean preheat);
 }
-  
+*/  
 }
