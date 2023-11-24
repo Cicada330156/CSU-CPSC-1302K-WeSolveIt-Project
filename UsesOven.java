@@ -10,7 +10,7 @@ public interface UsesOven {
 	 * We are talking about the getting the return of preheat
 	 *
 	 */
-	public boolean getPreheated();
+	public boolean getPreheat();
 	/**
 	 * We are talking about the setting the preheat
 	 *
