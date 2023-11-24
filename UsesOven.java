@@ -6,7 +6,7 @@
  *
  */
 
-public class UsesOven {
+public interface UsesOven {
 private boolean preheat;
 
     /**
