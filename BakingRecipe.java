@@ -7,15 +7,49 @@
  *
  */
 public class BakingRecipe extends Recipe implements UsesOven {
+    // Instance variables
     private boolean preheat;
     private int ovenTemp;
-/**
-*this is where we use the getpreheat method to return preheat as a boolean
-*/
-  public boolean getPreheat() { return this.preheat; }
-   /**
-  * this is where we use the setPreheat boolean to cause the prheat to equal itself.
-  */
-  public void setPreheat(boolean preheat) { this.preheat = preheat; }
 
+    // Getters and setters
+    /**
+    * this is where we will return the preheat
+    */
+    public boolean getPreheat() {
+        return preheat;
+    }
+    /**
+    * this is where we will set the preheat as a boolean.
+    */
+    public void setPreheat(boolean preheat) {
+        this.preheat = preheat;
+    }
+    /**
+    * this is where we will return the ovenTemp and have a int getOvenTemp
+    */
+    public int getOvenTemp() {
+        return ovenTemp;
+    }
+    /**
+    * this is where we will set the OvenTemp as a int and then call it as such.
+    */
+    public void setOvenTemp(int ovenTemp) {
+        this.ovenTemp = ovenTemp;
+    }
+
+    // Implemented methods from UsesOven interface
+    /**
+    * this is where we Override preheat and  have a boolean preheat method that will return preheat.
+    */
+    @Override
+    public boolean preheat() {
+        return preheat;
+    }
+    /**
+    * this is where we Override the ovenTemp to a int.
+    */
+    @Override
+    public int ovenTemp() {
+        return ovenTemp;
+    }
 }

@@ -5,16 +5,32 @@
  * @version 1.0
  *
  */
-public class UsesOven {
 
-/**
+public class UsesOven {
+private boolean preheat;
+
+    /**
 * We are using an interface to UsesOven for finding out the preheat with a boolean.
 *
 */
-public interface UsesOven {
-    boolean preheat = false;
-    boolean getPreheat();
-   void setPreheat(boolean preheat);
+    public Oven() {
+        this.preheat = false;
+    }
+
+   /**
+    * We are talking about the getting the return of preheat
+    *
+    */
+    public boolean getPreheated() {
+        return this.preheat;
+    }
+    /**
+    * We are talking about the setting the preheat
+    *
+    */
+    public void setPreheat(boolean preheat) {
+        this.preheat = preheat;
+    }
 }
-*/  
-}
+
+
