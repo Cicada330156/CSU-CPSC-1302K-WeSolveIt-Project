@@ -5,7 +5,7 @@
  *
  */
 
-public class UsesOven {
+public interface UsesOven {
 	/**
 	 * We are talking about the getting the return of preheat
 	 *
