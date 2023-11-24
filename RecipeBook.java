@@ -20,6 +20,8 @@ public class RecipeBook{
 		optionsMenu.add( "4) List all recipes" );
 		optionsMenu.add( "5) Quit" );
 
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+
 		String select = "";
 		while( ! select.equals( "5" )){
 			for( int i = 0; i < optionsMenu.size(); i++ ){
@@ -32,9 +34,15 @@ public class RecipeBook{
 				case "1":
 					// option 1 code block creates a new recipe object.
 					String oneSelect = "";
-					System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stove Top" );
-					System.out.print( "Please make a selection: " );
+					System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop" );
+					System.out.print( "Please make a selection (A, B, or C): " );
 					oneSelect = echo.nextLine();
+
+					if( oneSelect.equalsIgnoreCase("A")){
+						System.out.println( "You have selected 'Oven'.");
+						Recipe newRecipe = new BakingRecipe();
+						break;
+					}
 					break;
 				case "2":
 					// option 2 code block edits an existing recipe object.
