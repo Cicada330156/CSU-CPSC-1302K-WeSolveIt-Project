@@ -1,5 +1,13 @@
 import java.util.*;
 import java.io.*;
+import org.json.simple.*;
+
+/**
+ * A base Recipe class, to be used as a base or standalone class
+ * 
+ * @author Ari Betan-Snook
+ * @version 1.1;
+ */
 public class Recipe {
 	private boolean debug = false;
 
@@ -13,30 +21,32 @@ public class Recipe {
 	protected String description;
 	protected ArrayList<String> steps;
 	protected boolean servedHot;
-	//Recipe(), formatAsJSON(), Recipe(JsonObject)
-
-
+	// Recipe(), Recipe(JsonObject), OPTIONS Strings
 
 	/**
 	 * Asks the user for information to instantiate the object with.
 	 */
-	public Recipe () {
+	public Recipe() {
 	}
 
 	/**
-	 * Instantiates object with only a name. Calls the Recipe(String name, String description) as Recipe(name, "") 
+	 * Instantiates object with only a name. Calls the Recipe(String name, String
+	 * description) as Recipe(name, "")
+	 * 
 	 * @param name the name of this new recipe
 	 */
-	public Recipe (String name) {
+	public Recipe(String name) {
 		this(name, "");
 	}
 
 	/**
-	 * Instantiates the object with a name and description. Sets all other Strings to "" and all other ints to 0. Instantiates empty ArrayLists.
-	 * @param name The name of this new recipe
+	 * Instantiates the object with a name and description. Sets all other Strings
+	 * to "" and all other ints to 0. Instantiates empty ArrayLists.
+	 * 
+	 * @param name        The name of this new recipe
 	 * @param description The full length description of this recipe's product
 	 */
-	public Recipe (String name, String description) {
+	public Recipe(String name, String description) {
 		this.name = name;
 		this.description = description;
 		cookTime = 0;
@@ -51,13 +61,12 @@ public class Recipe {
 
 	/**
 	 * Instantiates the object baseed on a JsonObject representation of it
+	 * 
 	 * @param JsonRepresentation the JsonObject representation of the object
 	 */
-	//public Recipe (JsonObject myJsonObj) {}
+	// public Recipe (JsonObject myJsonObj) {}
 
-
-
-	private static int getAnInt (Scanner stdin) {
+	protected static int getAnInt(Scanner stdin) {
 		Integer userInput = null;
 		while (userInput == null) {
 			try {
@@ -72,57 +81,79 @@ public class Recipe {
 		return userInput;
 	}
 
-
-
 	/**
 	 * Gets all included recipes, as an Arraylist
-	 * @return the arrayList which includes all included recipes, meant to be edited by the end user
+	 * 
+	 * @return the arrayList which includes all included recipes, meant to be edited
+	 *         by the end user
 	 */
-	public ArrayList<Recipe> getIncludedRecipes () {
+	public ArrayList<Recipe> getIncludedRecipes() {
 		return includes;
 	}
 
 	/**
-	 * Returns the total amount of time the recipe will take. Includes time for each of the subrecipes, disincluding stand time (assuming that that overlaps)
+	 * Returns the total amount of time the recipe will take. Includes time for each
+	 * of the subrecipes, disincluding stand time (assuming that that overlaps)
+	 * 
 	 * @return an integer value outlining the expected time this recipe will take
 	 */
-	protected int getTime () {
+	protected int getTime() {
 		return prepTime + cookTime + standTime;
 	}
 
 	/**
-	 * Returns the total amount of time the recipe will take, with a breakdown of it. Includes time for each of the subrecipes, disincluding stand time (assuming that that overlaps)
-	 * @return a String which includes the total time, a breakdown of how that number was reached, and the same for all included recipes
+	 * Returns the total amount of time the recipe will take, with a breakdown of
+	 * it. Includes time for each of the subrecipes, disincluding stand time
+	 * (assuming that that overlaps)
+	 * 
+	 * @return a String which includes the total time, a breakdown of how that
+	 *         number was reached, and the same for all included recipes
 	 */
-	protected String getTimeAsString () {
-		return "Total time: " + (prepTime + cookTime + standTime) + "\nPrep time: " + prepTime + "\nCook time: " + cookTime + "\nStand time: " + standTime;
+	protected String getTimeAsString() {
+		return "Total time: " + (prepTime + cookTime + standTime) + "\nPrep time: " + prepTime + "\nCook time: "
+				+ cookTime + "\nStand time: " + standTime;
 	}
 
 	/**
 	 * Starts a timer
+	 * 
 	 * @param time the time in minutes
 	 */
-	private void startTimer (int time) {}
+	private void startTimer(int time) {
+	}
 
-
-
-	//  | Overridable methods below |
-	//  V			      V
+	// | Overridable methods below |
+	// V---------------------------V
 	/**
 	 * Formats the values of the object in the JSON format
+	 * 
 	 * @return this object, stored in the JSON format
 	 */
-	public String formatAsJSON () {
-		return "";
+	public JSONObject formatAsJSON() {
+		JSONObject json = new JSONObject();
+		json.put("recipeType", "Recipe");
+		json.put("name", name);
+		json.put("prepTime", prepTime);
+		json.put("cookTime", cookTime);
+		json.put("ingredients", ingredients);
+		json.put("requiredKitchenware", requiredKitchenware);
+		json.put("includes", includes);
+		json.put("description", description);
+		json.put("steps", steps);
+		json.put("servedHot", servedHot);
+		return json;
 	}
 
 	/**
-	 * Asks the user what they would like to edit, and changes it for them. Continues looping back to the menu unless indicated otherwise
+	 * Asks the user what they would like to edit, and changes it for them.
+	 * Continues looping back to the menu unless indicated otherwise
+	 * 
 	 * @param stdin the scanner to use
 	 * @return true if all was successful, false if there was an error
 	 */
 	protected final String OPTIONS = "";
-	public boolean editRecipe (Scanner stdin) {
+
+	public void editRecipe(Scanner stdin) {
 		int userInput = 0;
 		boolean cont = true;
 		while (cont) {
@@ -132,15 +163,14 @@ public class Recipe {
 			if (userInput == 0) {
 				cont = false;
 			} else if (userInput >= 0) {
-				editItem ( stdin, userInput );
+				editItem(stdin, userInput);
 			} else {
 				System.out.println("Not a valid choice (choices are >= 0)");
 			}
 		}
-		return true;
 	}
 
-	private void editItem (Scanner stdin, int userInput) {
+	protected void editItem(Scanner stdin, int userInput) {
 		int newTime;
 		String answer;
 		switch (userInput) {
@@ -207,7 +237,7 @@ public class Recipe {
 							System.out.println("What ingredient would you like to add?");
 							ingredients.add(stdin.nextLine());
 							break;
-						case "edit"://could use updating
+						case "edit":// could use updating
 							System.out.println("What index would you like to edit? (listed above)");
 							int indexToEdit = getAnInt(stdin);
 							try {
@@ -228,7 +258,8 @@ public class Recipe {
 							}
 							break;
 						default:
-							System.out.println("Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
+							System.out.println(
+									"Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
 					}
 					System.out.println("Your ingredients are: ");
 					for (int i = 0; i < ingredients.size(); i++) {
@@ -251,7 +282,7 @@ public class Recipe {
 							System.out.println("What kitchenware would you like to add?");
 							requiredKitchenware.add(stdin.nextLine());
 							break;
-						case "edit"://could use updating
+						case "edit":// could use updating
 							System.out.println("What index would you like to edit? (listed above)");
 							int indexToEdit = getAnInt(stdin);
 							try {
@@ -272,7 +303,8 @@ public class Recipe {
 							}
 							break;
 						default:
-							System.out.println("Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
+							System.out.println(
+									"Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
 					}
 					System.out.println("Your kitchenware is: ");
 					for (int i = 0; i < requiredKitchenware.size(); i++) {
@@ -283,13 +315,13 @@ public class Recipe {
 				}
 				break;
 			case 7:
-				//description
+				// description
 				System.out.println("Your current description: \n" + description);
 				System.out.println("What wpould you like to change it to?");
 				description = stdin.nextLine();
 				break;
 			case 8:
-				//steps
+				// steps
 				System.out.println("Your current steps are: ");
 				for (int i = 0; i < steps.size(); i++) {
 					System.out.println(i + "\t" + steps.get(i).toString());
@@ -302,7 +334,7 @@ public class Recipe {
 							System.out.println("What step would you like to add?");
 							steps.add(stdin.nextLine());
 							break;
-						case "edit"://could use updating
+						case "edit":// could use updating
 							System.out.println("What index would you like to edit? (listed above)");
 							int indexToEdit = getAnInt(stdin);
 							try {
@@ -323,7 +355,8 @@ public class Recipe {
 							}
 							break;
 						default:
-							System.out.println("Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
+							System.out.println(
+									"Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
 					}
 					System.out.println("Your steps are: ");
 					for (int i = 0; i < steps.size(); i++) {
@@ -334,10 +367,10 @@ public class Recipe {
 				}
 				break;
 			case 9:
-				//served hot
+				// served hot
 				System.out.print("Currently your dish is ");
 				if (!servedHot) {
-				System.out.print("not ");
+					System.out.print("not ");
 				}
 				System.out.println("served hot");
 				System.out.println("Would you like your dish to be served hot? [yes] or [no]");
@@ -352,7 +385,7 @@ public class Recipe {
 				}
 				break;
 			case 10:
-				//display
+				// display
 				System.out.println(this.toString());
 				break;
 			case 3301:
@@ -364,36 +397,36 @@ public class Recipe {
 		}
 	}
 
-
-
 	/**
 	 * checks if this recipe is equal to another recipe object
+	 * 
 	 * @param otherRecipe the other recipe to compare to
 	 * @return true is the two are the same, false if not
 	 */
-	public boolean equals (Recipe otherRecipe) {
-		if (otherRecipe.getClass() != Recipe.class) {
+	public boolean equals(Object compareTo) {
+		if (compareTo.getClass() != Recipe.class) {
 			return false;
 		}
-		if ( name != otherRecipe.name ) {
+		Recipe otherRecipe = (Recipe) compareTo;
+		if (!(name.equals(otherRecipe.name))) {
 			return false;
-		} else if ( prepTime != otherRecipe.prepTime ) {
+		} else if (prepTime != otherRecipe.prepTime) {
 			return false;
-		} else if ( cookTime != otherRecipe.cookTime  ) {
+		} else if (cookTime != otherRecipe.cookTime) {
 			return false;
-		} else if ( standTime != otherRecipe.standTime ) {
+		} else if (standTime != otherRecipe.standTime) {
 			return false;
-		} else if ( ingredients != otherRecipe.ingredients ) {
+		} else if (!(ingredients.equals(otherRecipe.ingredients))) {
 			return false;
-		} else if ( requiredKitchenware != otherRecipe.requiredKitchenware ) {
+		} else if (!(requiredKitchenware.equals(otherRecipe.requiredKitchenware))) {
 			return false;
-		} else if ( includes != otherRecipe.includes ) {
+		} else if (!(includes.equals(otherRecipe.includes))) {
 			return false;
-		} else if ( description != otherRecipe.description ) {
+		} else if (!(description.equals(otherRecipe.description))) {
 			return false;
-		} else if ( steps != otherRecipe.steps ) {
+		} else if (!(steps.equals(otherRecipe.steps))) {
 			return false;
-		} else if ( servedHot != otherRecipe.servedHot ) {
+		} else if (servedHot != otherRecipe.servedHot) {
 			return false;
 		} else {
 			return true;
@@ -402,10 +435,20 @@ public class Recipe {
 
 	/**
 	 * returns a String representation of the object, formatted as follows:
-	 * <ul><li>the name of the recipe</li><li>the time the recipe will take, as formatted by getTimeAsString()</li><li>ingredients, as a table</li><li>required cookware, as a list</li><li>The description of the recipe</li><li>whether or not this is served hot</li><li>the list of steps to take</li><li>any other recipes included in this one, laid out in the same format</li></ul>
+	 * <ul>
+	 * <li>the name of the recipe</li>
+	 * <li>the time the recipe will take, as formatted by getTimeAsString()</li>
+	 * <li>ingredients, as a table</li>
+	 * <li>required cookware, as a list</li>
+	 * <li>The description of the recipe</li>
+	 * <li>whether or not this is served hot</li>
+	 * <li>the list of steps to take</li>
+	 * <li>any other recipes included in this one, laid out in the same format</li>
+	 * </ul>
+	 * 
 	 * @return the String representation of this recipe
 	 */
-	public String toString () {
+	public String toString() {
 		String descriptor = "";
 		descriptor += "*** " + name + " ***";
 		descriptor += "\n";
