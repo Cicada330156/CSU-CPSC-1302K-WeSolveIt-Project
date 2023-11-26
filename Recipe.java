@@ -25,6 +25,7 @@ public class Recipe {
 
 	// Recipe(), Recipe(JsonObject), OPTIONS Strings
 	/**************************************************************************************
+	 * https://docs.oracle.com/javaee/7/api/javax/json/JsonWriter.html
 	 * https://docs.oracle.com/middleware/1213/wls/WLPRG/java-api-for-json-proc.htm#WLPRG1061
 	 ***************************************************************************************/
 
