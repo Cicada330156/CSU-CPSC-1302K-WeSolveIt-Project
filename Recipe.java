@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
-import org.json.simple.*;
+
+import javax.json.*;
 
 /**
  * A base Recipe class, to be used as a base or standalone class
@@ -21,7 +22,11 @@ public class Recipe {
 	protected String description;
 	protected ArrayList<String> steps;
 	protected boolean servedHot;
+
 	// Recipe(), Recipe(JsonObject), OPTIONS Strings
+	/**************************************************************************************
+	 * https://docs.oracle.com/middleware/1213/wls/WLPRG/java-api-for-json-proc.htm#WLPRG1061
+	 ***************************************************************************************/
 
 	/**
 	 * Asks the user for information to instantiate the object with.
@@ -129,18 +134,34 @@ public class Recipe {
 	 * 
 	 * @return this object, stored in the JSON format
 	 */
-	public JSONObject formatAsJSON() {
-		JSONObject json = new JSONObject();
-		json.put("recipeType", "Recipe");
-		json.put("name", name);
-		json.put("prepTime", prepTime);
-		json.put("cookTime", cookTime);
-		json.put("ingredients", ingredients);
-		json.put("requiredKitchenware", requiredKitchenware);
-		json.put("includes", includes);
-		json.put("description", description);
-		json.put("steps", steps);
-		json.put("servedHot", servedHot);
+	public JsonObjectBuilder formatAsJSON() {
+		JsonObjectBuilder json = Json.createObjectBuilder();
+		json.add("recipeType", "Recipe");
+		json.add("name", name);
+		json.add("prepTime", prepTime);
+		json.add("cookTime", cookTime);
+		JsonArrayBuilder jsonIngredients = Json.createArrayBuilder();
+		for (String ingredient : ingredients) {
+			jsonIngredients.add(ingredient);
+		}
+		json.add("ingredients", jsonIngredients);
+		JsonArrayBuilder jsonRequiredKitchenware = Json.createArrayBuilder();
+		for (String kitchenware : requiredKitchenware) {
+			jsonIngredients.add(kitchenware);
+		}
+		json.add("requiredKitchenware", jsonRequiredKitchenware);
+		JsonArrayBuilder jsonIncludes = Json.createArrayBuilder();
+		for (Recipe otherRecipe : includes) {
+			jsonIncludes.add(otherRecipe.name);
+		}
+		json.add("includes", jsonIncludes);
+		json.add("description", description);
+		JsonArrayBuilder jsonSteps = Json.createArrayBuilder();
+		for (String step : steps) {
+			jsonIngredients.add(step);
+		}
+		json.add("steps", jsonSteps);
+		json.add("servedHot", servedHot);
 		return json;
 	}
 
