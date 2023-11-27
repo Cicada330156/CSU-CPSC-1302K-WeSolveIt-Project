@@ -20,26 +20,31 @@ public class BakingRecipe extends Recipe implements UsesOven {
 
 	// constructors
 	public BakingRecipe() {
-
+		super();
+		preheat = true;
+		ovenTemp = -1;
 	}
 
 	public BakingRecipe(String name) {
 		super(name);
+		preheat = true;
+		ovenTemp = -1;
 	}
 
-	public BakingRecipe(JsonObject myJsonObj) {
+	public BakingRecipe(JsonObject myJsonObj) throws javax.json.JsonException {
 		super(myJsonObj);
-		preheat = myJsonObj.getBoolean("preheat");
-		ovenTemp = myJsonObj.getInt("ovenTemp");
+		try {
+			preheat = myJsonObj.getBoolean("preheat");
+		} catch (javax.json.JsonException e) {
+			System.out.println("error parsing preheat for object " + name);
+		}
+		try {
+			ovenTemp = myJsonObj.getInt("ovenTemp");
+		} catch (javax.json.JsonException e) {
+			System.out.println("error parsing ovenTemp for object " + name);
+		}
 	}
 
-<<<<<<< HEAD
-=======
-	public BakingRecipe(String name) {
-		this.name = name;
-	}
-
->>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 	// Getters and setters
 	/**
 	 * this is where we will return the preheat

@@ -13,31 +13,30 @@ public class StovetopRecipe extends Recipe {
     private String temp;
     private String potType;
 
-    public StovetopRecipe(String name) {
-        super(name);
-    }
-
-    public StovetopRecipe(JsonObject myJsonObj) {
-        super(myJsonObj);
-        temp = myJsonObj.getString("temp");
-        potType = myJsonObj.getString("potType");
-    }
-
-    /**
-     * We are using the StoveTopRecipe to have a name temp and pottype and keeping
-     * it as a this value.
-     */
-    // Constructor
-    public StovetopRecipe(String name, String temp, String potType) {
-        super(name);
-        this.temp = temp;
-        this.potType = potType;
-    }
-
     public StovetopRecipe() {
         super();
         temp = "";
         potType = "";
+    }
+
+    public StovetopRecipe(String name) {
+        super(name);
+        temp = "";
+        potType = "";
+    }
+
+    public StovetopRecipe(JsonObject myJsonObj) {
+        super(myJsonObj);
+        try {
+            temp = myJsonObj.getString("temp");
+        } catch (javax.json.JsonException e) {
+            System.out.println("error parsing temp for object " + name);
+        }
+        try {
+            potType = myJsonObj.getString("potType");
+        } catch (javax.json.JsonException e) {
+            System.out.println("error parsing potType for object " + name);
+        }
     }
 
     // Getters and Setters

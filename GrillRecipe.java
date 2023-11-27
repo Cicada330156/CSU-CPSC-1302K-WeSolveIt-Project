@@ -14,30 +14,30 @@ public class GrillRecipe extends Recipe {
     private boolean preheat;
     private int grillTemp;
 
-    // Constructor
-    /**
-     * this is where we will declare a boolean and a int for grillTemp and preheat.
-     */
-    public GrillRecipe(boolean preheat, int grillTemp) {
-        this.preheat = preheat;
-        this.grillTemp = grillTemp;
+    public GrillRecipe() {
+        super();
+        preheat = true;
+        grillTemp = -1;
     }
 
     public GrillRecipe(String name) {
         super(name);
-        this.preheat = true;
-        this.grillTemp = -1;
+        preheat = true;
+        grillTemp = -1;
     }
 
     public GrillRecipe(JsonObject myJsonObj) {
         super(myJsonObj);
-        preheat = myJsonObj.getBoolean("preheat");
-        grillTemp = myJsonObj.getInt("grillTemp");
-    }
-
-    public GrillRecipe() {
-        this.preheat = true;
-        this.grillTemp = -1;
+        try {
+            preheat = myJsonObj.getBoolean("preheat");
+        } catch (javax.json.JsonException e) {
+            System.out.println("error parsing preheat for object " + name);
+        }
+        try {
+            grillTemp = myJsonObj.getInt("grillTemp");
+        } catch (javax.json.JsonException e) {
+            System.out.println("error parsing grillTemp for object " + name);
+        }
     }
 
     // Getter and Setter methods

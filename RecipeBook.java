@@ -37,15 +37,9 @@ public class RecipeBook {
 				case "1":
 					// option 1 code block creates a new recipe object.
 					String oneSelect = "";
-<<<<<<< HEAD
-					while( ! oneSelect.equals( "0" )){
-						System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back" );
-						System.out.print( "Please make a selection (A, B, C, or 0): " );
-=======
 					while (!oneSelect.equals("0")) {
 						System.out.println("Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back");
-						System.out.print("Please make a selection (A, B, C, or D): ");
->>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
+						System.out.print("Please make a selection (A, B, C, or 0): ");
 						oneSelect = echo.nextLine();
 
 						if (oneSelect.equalsIgnoreCase("A")) {
