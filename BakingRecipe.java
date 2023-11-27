@@ -20,17 +20,29 @@ public class BakingRecipe extends Recipe implements UsesOven {
 
 	// constructors
 	public BakingRecipe() {
-
+		super();
+		preheat = true;
+		ovenTemp = -1;
 	}
 
 	public BakingRecipe(String name) {
 		super(name);
+		preheat = true;
+		ovenTemp = -1;
 	}
 
-	public BakingRecipe(JsonObject myJsonObj) {
+	public BakingRecipe(JsonObject myJsonObj) throws javax.json.JsonException {
 		super(myJsonObj);
-		preheat = myJsonObj.getBoolean("preheat");
-		ovenTemp = myJsonObj.getInt("ovenTemp");
+		try {
+			preheat = myJsonObj.getBoolean("preheat");
+		} catch (javax.json.JsonException e) {
+			System.out.println("error parsing preheat for object " + name);
+		}
+		try {
+			ovenTemp = myJsonObj.getInt("ovenTemp");
+		} catch (javax.json.JsonException e) {
+			System.out.println("error parsing ovenTemp for object " + name);
+		}
 	}
 
 	// Getters and setters
@@ -139,7 +151,8 @@ public class BakingRecipe extends Recipe implements UsesOven {
 			case 12:
 				int newOvenTemp = -1;
 				while (newOvenTemp < 0) {
-					System.out.print("What would you like to change the preheat temp to? Enter a positive integer value in Fahrenheit: ");
+					System.out.print(
+							"What would you like to change the preheat temp to? Enter a positive integer value in Fahrenheit: ");
 					try {
 						newOvenTemp = stdin.nextInt();
 					} catch (InputMismatchException e) {

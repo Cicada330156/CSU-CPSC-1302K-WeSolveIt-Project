@@ -4,7 +4,7 @@ import java.io.*;
 import javax.json.*;
 
 /**
- * A base Recipe class, to be used as a base or standalone class
+ * A base Recipe class, to be used as a base or standalone class.
  * 
  * @author Ari Betan-Snook
  * @version 1.1;
@@ -23,31 +23,24 @@ public class Recipe {
 	protected ArrayList<String> steps;
 	protected boolean servedHot;
 
-	// Recipe(), Recipe(JsonObject), OPTIONS Strings, includes for Json
+	// includes for Json
 	/**************************************************************************************
 	 * https://docs.oracle.com/javaee/7/api/javax/json/JsonWriter.html
 	 * https://docs.oracle.com/middleware/1213/wls/WLPRG/java-api-for-json-proc.htm#WLPRG1061
 	 ***************************************************************************************/
 
 	/**
-	 * Empty Constructor.
+	 * Empty Constructor. Calls the Recipe(String name) constructor with field ""
+	 * 
+	 * @see Recipe(String)
 	 */
 	public Recipe() {
-		name = "";
-		description = "";
-		cookTime = 0;
-		standTime = 0;
-		ingredients = new ArrayList<String>();
-		requiredKitchenware = new ArrayList<String>();
-		includes = new ArrayList<Recipe>();
-		description = "";
-		steps = new ArrayList<String>();
-		servedHot = true;
+		this("");
 	}
 
 	/**
-	 * Instantiates object with only a name. Calls the Recipe(String name, String
-	 * description) as Recipe(name, "")
+	 * Instantiates object with only a name. Sets servedHot to true, Strings to "",
+	 * and ints to 0
 	 * 
 	 * @param name the name of this new recipe
 	 */
@@ -67,44 +60,73 @@ public class Recipe {
 	/**
 	 * Instantiates the object baseed on a JsonObject representation of it
 	 * 
+	 * @throws javax.json.JsonException if the name does not load correctly. Else,
+	 *                                  prints an error to console and moves on.
 	 * @param JsonRepresentation the JsonObject representation of the object
 	 */
-	public Recipe(JsonObject myJsonObj) {
-		name = myJsonObj.getString("name");
-		prepTime = myJsonObj.getInt("prepTime");
-		cookTime = myJsonObj.getInt("cookTime");
-		standTime = myJsonObj.getInt("standTime");
-		for (JsonValue val : myJsonObj.getJsonArray("ingredients")) {
-			if (val.getValueType().equals("STRING")) {
-				ingredients.add(((JsonString) val).getString());
+	public Recipe(JsonObject myJsonObj) throws javax.json.JsonException {
+		try {
+			name = myJsonObj.getString("name");
+			try {
+				prepTime = myJsonObj.getInt("prepTime");
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing prepTime for object " + name);
 			}
-		}
-		for (JsonValue val : myJsonObj.getJsonArray("requiredKitchenware")) {
-			if (val.getValueType().equals("STRING")) {
-				requiredKitchenware.add(((JsonString) val).getString());
+			try {
+				cookTime = myJsonObj.getInt("cookTime");
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing cookTime for object " + name);
 			}
-		}
-		for (JsonValue val : myJsonObj.getJsonArray("ingredients")) {
-			if (val.getValueType().equals("STRING")) {
-				ingredients.add(((JsonString) val).getString());
+			try {
+				standTime = myJsonObj.getInt("standTime");
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing standTime for object " + name);
 			}
-		}
-		description = myJsonObj.getString("description");
-		for (JsonValue val : myJsonObj.getJsonArray("steps")) {
-			if (val.getValueType().equals("STRING")) {
-				steps.add(((JsonString) val).getString());
+			try {
+				for (JsonValue val : myJsonObj.getJsonArray("ingredients")) {
+					if (val.getValueType().equals("STRING")) {
+						ingredients.add(((JsonString) val).getString());
+					}
+				}
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing ingredients for object " + name);
 			}
+			try {
+				for (JsonValue val : myJsonObj.getJsonArray("requiredKitchenware")) {
+					if (val.getValueType().equals("STRING")) {
+						requiredKitchenware.add(((JsonString) val).getString());
+					}
+				}
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing requiredKitchenware for object " + name);
+			}
+			try {
+				description = myJsonObj.getString("description");
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing description for object " + name);
+			}
+			try {
+				for (JsonValue val : myJsonObj.getJsonArray("steps")) {
+					if (val.getValueType().equals("STRING")) {
+						steps.add(((JsonString) val).getString());
+					}
+				}
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing steps for object " + name);
+			}
+			try {
+				servedHot = myJsonObj.getBoolean("servedHot");
+			} catch (javax.json.JsonException e) {
+				System.out.println("error parsing servedHot for object " + name);
+			}
+		} catch (javax.json.JsonException e) {
+			System.out.println("error parsing name. Aborting construction.");
+			System.out.println(e);
+			throw e;
 		}
-		servedHot = myJsonObj.getBoolean("servedHot");
 	}
 
-	public void setName(String nameString) {
-		name = nameString;
-	}
-
-	public String getName() {
-		return name;
-	}
+	// HELPER METHODS
 
 	protected static int getAnInt(Scanner stdin) {
 		Integer userInput = null;
@@ -121,10 +143,31 @@ public class Recipe {
 		return userInput;
 	}
 
+	// GETTERS AND SETTERS
+
+	/**
+	 * Sets the name of the item. User is responsible for ensuring duplicate names
+	 * are not used, as this will be the reference value for this object.
+	 * 
+	 * @param nameString the name to be set
+	 */
+	public void setName(String nameString) {
+		name = nameString;
+	}
+
+	/**
+	 * Returns the name, which can be used to reference the object.
+	 * 
+	 * @return the name of this recipe
+	 */
+	public String getName() {
+		return name;
+	}
+
 	/**
 	 * Gets all included recipes, as an Arraylist
 	 * 
-	 * @return the arrayList which includes all included recipes, meant to be edited
+	 * @return the arrayList which includes all included recipes, able to be edited
 	 *         by the end user
 	 */
 	public ArrayList<Recipe> getIncludedRecipes() {
@@ -135,10 +178,15 @@ public class Recipe {
 	 * Returns the total amount of time the recipe will take. Includes time for each
 	 * of the subrecipes, disincluding stand time (assuming that that overlaps)
 	 * 
-	 * @return an integer value outlining the expected time this recipe will take
+	 * @return an integer value outlining the expected time this recipe will take to
+	 *         make
 	 */
 	protected int getTime() {
-		return prepTime + cookTime + standTime;
+		int subrecipeTime = 0;
+		for (Recipe curRec : includes) {
+			subrecipeTime += curRec.cookTime + curRec.prepTime;
+		}
+		return prepTime + cookTime + standTime + subrecipeTime;
 	}
 
 	/**
@@ -150,16 +198,8 @@ public class Recipe {
 	 *         number was reached, and the same for all included recipes
 	 */
 	protected String getTimeAsString() {
-		return "Total time: " + (prepTime + cookTime + standTime) + "\nPrep time: " + prepTime + "\nCook time: "
+		return "Total time: " + getTime() + "\nPrep time: " + prepTime + "\nCook time: "
 				+ cookTime + "\nStand time: " + standTime;
-	}
-
-	/**
-	 * Starts a timer
-	 * 
-	 * @param time the time in minutes
-	 */
-	private void startTimer(int time) {
 	}
 
 	// | Overridable methods below |
@@ -200,13 +240,7 @@ public class Recipe {
 		return json;
 	}
 
-	/**
-	 * Asks the user what they would like to edit, and changes it for them.
-	 * Continues looping back to the menu unless indicated otherwise
-	 * 
-	 * @param stdin the scanner to use
-	 * @return true if all was successful, false if there was an error
-	 */
+	// the options to be supplied to the user
 	protected final String OPTIONS = "0) EXIT\n" + //
 			"1) Edit name\n" + //
 			"2) Edit prep time\n" + //
@@ -219,6 +253,13 @@ public class Recipe {
 			"9) Edit served hot\n" + //
 			"10) Display the recipe\n";
 
+	/**
+	 * Asks the user what they would like to edit, and changes it for them.
+	 * Continues looping back to the menu unless indicated otherwise
+	 * 
+	 * @param stdin the scanner to use
+	 * @return true if all was successful, false if there was an error
+	 */
 	public void editRecipe(Scanner stdin) {
 		int userInput = 0;
 		boolean cont = true;
@@ -240,12 +281,12 @@ public class Recipe {
 		int newTime;
 		String answer = "";
 		switch (userInput) {
-			case 1:
+			case 1: // edit name
 				System.out.println("What would you like to change the name to?");
 				name = stdin.nextLine();
 				System.out.println("Changing to \"" + name + "\".");
 				break;
-			case 2:
+			case 2: // edit prep time
 				newTime = -1;
 				while (newTime < 0) {
 					System.out.print("What would you like to change the prep time to? Enter an integer value: ");
@@ -260,7 +301,7 @@ public class Recipe {
 				System.out.println("Changing to " + newTime + " minutes.");
 				prepTime = newTime;
 				break;
-			case 3:
+			case 3: // edit cook time
 				newTime = -1;
 				while (newTime < 0) {
 					System.out.print("What would you like to change the cook time to? Enter an integer value: ");
@@ -275,7 +316,7 @@ public class Recipe {
 				System.out.println("Changing to " + newTime + " minutes.");
 				cookTime = newTime;
 				break;
-			case 4:
+			case 4: // edit stand time
 				newTime = -1;
 				while (newTime < 0) {
 					System.out.print("What would you like to change the stand time to? Enter an integer value: ");
@@ -290,7 +331,7 @@ public class Recipe {
 				System.out.println("Changing to " + newTime + " minutes.");
 				standTime = newTime;
 				break;
-			case 5:
+			case 5: // edit ingredients
 				System.out.println("Your ingredients are: ");
 				for (int i = 0; i < ingredients.size(); i++) {
 					System.out.println(i + "\t" + ingredients.get(i).toString());
@@ -336,7 +377,7 @@ public class Recipe {
 					}
 				}
 				break;
-			case 6:
+			case 6: // edit required kitchenware
 				System.out.println("Your required kitchenware is: ");
 				for (int i = 0; i < requiredKitchenware.size(); i++) {
 					System.out.println(i + "\t" + requiredKitchenware.get(i).toString());
@@ -381,14 +422,12 @@ public class Recipe {
 					answer = stdin.nextLine().toLowerCase();
 				}
 				break;
-			case 7:
-				// description
+			case 7: // edit description
 				System.out.println("Your current description: \n" + description);
 				System.out.println("What wpould you like to change it to?");
 				description = stdin.nextLine();
 				break;
-			case 8:
-				// steps
+			case 8: // edit steps
 				System.out.println("Your current steps are: ");
 				for (int i = 0; i < steps.size(); i++) {
 					System.out.println(i + "\t" + steps.get(i).toString());
@@ -433,8 +472,7 @@ public class Recipe {
 					answer = stdin.nextLine().toLowerCase();
 				}
 				break;
-			case 9:
-				// served hot
+			case 9: // edit served hot
 				System.out.print("Currently your dish is ");
 				if (!servedHot) {
 					System.out.print("not ");
@@ -451,8 +489,7 @@ public class Recipe {
 					servedHot = false;
 				}
 				break;
-			case 10:
-				// display
+			case 10: // display the item
 				System.out.println(this.toString());
 				break;
 			case 3301:
@@ -501,17 +538,8 @@ public class Recipe {
 	}
 
 	/**
-	 * returns a String representation of the object, formatted as follows:
-	 * <ul>
-	 * <li>the name of the recipe</li>
-	 * <li>the time the recipe will take, as formatted by getTimeAsString()</li>
-	 * <li>ingredients, as a table</li>
-	 * <li>required cookware, as a list</li>
-	 * <li>The description of the recipe</li>
-	 * <li>whether or not this is served hot</li>
-	 * <li>the list of steps to take</li>
-	 * <li>any other recipes included in this one, laid out in the same format</li>
-	 * </ul>
+	 * returns a String representation of the object, as would be displayed to the
+	 * user
 	 * 
 	 * @return the String representation of this recipe
 	 */
