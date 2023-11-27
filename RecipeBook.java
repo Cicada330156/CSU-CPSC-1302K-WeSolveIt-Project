@@ -68,7 +68,8 @@ public class RecipeBook {
 						else if( oneSelect.equalsIgnoreCase( "0" )){
 							System.out.println( "Returning to main options menu." );
 							break;
-						} else {
+						} 
+						else{
 							System.out.println(oneSelect + " is not a valid option.");
 						}
 						oneSelect = "";
