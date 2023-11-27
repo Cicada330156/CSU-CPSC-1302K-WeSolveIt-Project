@@ -33,10 +33,6 @@ public class BakingRecipe extends Recipe implements UsesOven {
 		ovenTemp = myJsonObj.getInt("ovenTemp");
 	}
 
-	public BakingRecipe( String name ){
-		this.name = name;
-	}
-
 	// Getters and setters
 	/**
 	 * this is where we will return the preheat

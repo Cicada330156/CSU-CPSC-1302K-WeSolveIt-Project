@@ -37,7 +37,7 @@ public class RecipeBook{
 					String oneSelect = "";
 					while( ! oneSelect.equals( "0" )){
 						System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back" );
-						System.out.print( "Please make a selection (A, B, C, or D): " );
+						System.out.print( "Please make a selection (A, B, C, or 0): " );
 						oneSelect = echo.nextLine();
 
 						if( oneSelect.equalsIgnoreCase("A")){
@@ -54,7 +54,7 @@ public class RecipeBook{
 							oneSelect = echo.nextLine();
 							Recipe newRecipe = new GrillRecipe(oneSelect);
 							System.out.println(" New Grill Recipe added: " + newRecipe.getName() );
-							// recipes.add( oneSelect );
+							recipes.add( newRecipe );
 						}
 						else if( oneSelect.equalsIgnoreCase( "C" )){
 							System.out.println( "You have selected 'Stovetop'." );
@@ -62,9 +62,9 @@ public class RecipeBook{
 							oneSelect = echo.nextLine();
 							Recipe newRecipe = new StovetopRecipe(oneSelect);
 							System.out.println( "New Stovetop Recipe added: " + newRecipe.getName() );
-							// recipes.add( oneSelect );
+							recipes.add( newRecipe );
 						}
-						else if( oneSelect.equalsIgnoreCase( "D" )){
+						else if( oneSelect.equalsIgnoreCase( "0" )){
 							System.out.println( "Returning to main options menu." );
 							break;
 						}
@@ -77,9 +77,18 @@ public class RecipeBook{
 				case "2":
 					// option 2 code block edits an existing recipe object.
 					String twoSelect = "";
-					System.out.print( "Enter the name of the recipe you would like to edit: " );
-					twoSelect = echo.nextLine();
-					System.out.println( "You entered " + twoSelect );
+					while( ! twoSelect.equals( "0" )){
+						System.out.print( "Enter the name of the recipe you would like to edit (or enter 0 to return): " );
+						twoSelect = echo.nextLine();
+						System.out.println( "You entered " + twoSelect );
+						for( Recipe rec : recipes ){
+							if( twoSelect.equals( rec.getName() )){
+								rec.editRecipe( echo );
+							}
+						}
+						System.out.println( "ERROR: Recipe not found." );
+					}
+					twoSelect = "";
 					break;
 				case "3":
 					// option 3 code block displays a recipe.
