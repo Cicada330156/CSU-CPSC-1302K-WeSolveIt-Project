@@ -88,7 +88,6 @@ public class RecipeBook {
 								rec.editRecipe(echo);
 							}
 						}
-						System.out.println("ERROR: Recipe not found.");
 					}
 					twoSelect = "";
 					break;
