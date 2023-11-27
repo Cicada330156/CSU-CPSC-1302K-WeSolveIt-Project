@@ -279,7 +279,7 @@ public class Recipe {
 
 	protected void editItem(Scanner stdin, int userInput) {
 		int newTime;
-		String answer;
+		String answer = "";
 		switch (userInput) {
 			case 1: // edit name
 				System.out.println("What would you like to change the name to?");
@@ -319,7 +319,7 @@ public class Recipe {
 			case 4: // edit stand time
 				newTime = -1;
 				while (newTime < 0) {
-					System.out.print("What would you like to change the stand time to? Enter an integer value.");
+					System.out.print("What would you like to change the stand time to? Enter an integer value: ");
 					try {
 						newTime = stdin.nextInt();
 					} catch (InputMismatchException e) {
@@ -336,9 +336,9 @@ public class Recipe {
 				for (int i = 0; i < ingredients.size(); i++) {
 					System.out.println(i + "\t" + ingredients.get(i).toString());
 				}
-				System.out.println("would you like to [add], [edit], or [delete] an ingredient or [exit]?");
-				answer = stdin.nextLine().toLowerCase();
-				while (answer != "exit") {
+				while ( ! answer.equals( "exit")) {
+					System.out.println("would you like to [add], [edit], or [delete] an ingredient or [exit]?");
+					answer = stdin.nextLine().toLowerCase();
 					switch (answer) {
 						case "add":
 							System.out.println("What ingredient would you like to add?");
@@ -364,6 +364,9 @@ public class Recipe {
 								System.out.println("Not a valid index");
 							}
 							break;
+						case "exit":
+							System.out.println( "Returning to options." );
+							break;
 						default:
 							System.out.println(
 									"Sorry, that is not a valid option. Valid options are encased in brackets like [] below.");
@@ -372,8 +375,6 @@ public class Recipe {
 					for (int i = 0; i < ingredients.size(); i++) {
 						System.out.println(i + "\t" + ingredients.get(i).toString());
 					}
-					System.out.println("would you like to [add] or [edit] an item or [exit]?");
-					answer = stdin.nextLine().toLowerCase();
 				}
 				break;
 			case 6: // edit required kitchenware
@@ -383,7 +384,7 @@ public class Recipe {
 				}
 				System.out.println("would you like to [add], [edit], or [delete] a piece of kitchenware or [exit]?");
 				answer = stdin.nextLine().toLowerCase();
-				while (answer != "exit") {
+				while ( ! answer.equals( "exit" )) {
 					switch (answer) {
 						case "add":
 							System.out.println("What kitchenware would you like to add?");
@@ -433,7 +434,7 @@ public class Recipe {
 				}
 				System.out.println("would you like to [add], [edit], or [delete] a step or [exit]?");
 				answer = stdin.nextLine().toLowerCase();
-				while (answer != "exit") {
+				while (! answer.equals( "exit") ) {
 					switch (answer) {
 						case "add":
 							System.out.println("What step would you like to add?");
