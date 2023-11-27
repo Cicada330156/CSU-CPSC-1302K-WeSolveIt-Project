@@ -1,4 +1,8 @@
 import java.util.Scanner;
+
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import java.io.*;
 import javax.json.*;
 
@@ -16,6 +20,12 @@ public class StovetopRecipe extends Recipe {
 
     public StovetopRecipe(String name) {
         super(name);
+    }
+
+    public StovetopRecipe(JsonObject myJsonObj) {
+        super(myJsonObj);
+        temp = myJsonObj.getString("temp");
+        potType = myJsonObj.getString("potType");
     }
 
     /**
@@ -64,11 +74,11 @@ public class StovetopRecipe extends Recipe {
      * super and put to get to use the json.
      */
     @Override
-    public JSONObject formatAsJSON() {
-        JSONObject json = super.toJSON();
-        json.put("recipeType", "StovetopRecipe");
-        json.put("temp", temp);
-        json.put("potType", potType);
+    public JsonObjectBuilder formatAsJSON() {
+        JsonObjectBuilder json = super.toJSON();
+        json.add("recipeType", "StovetopRecipe");
+        json.add("temp", temp);
+        json.add("potType", potType);
         return json;
     }
 

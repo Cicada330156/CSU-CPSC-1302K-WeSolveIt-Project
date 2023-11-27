@@ -1,7 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import javax.json.*;
-
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 /**
  * In this class we will extend recipe, use instance variables, boolean, a grill
  * temp as well.
@@ -21,6 +22,12 @@ public class GrillRecipe extends Recipe {
     public GrillRecipe(boolean preheat, int grillTemp) {
         this.preheat = preheat;
         this.grillTemp = grillTemp;
+    }
+
+    public GrillRecipe(JsonObject myJsonObj) {
+        super(myJsonObj);
+        preheat = myJsonObj.getBoolean("preheat");
+        grillTemp = myJsonObj.getInt("grillTemp");
     }
 
     // Getter and Setter methods
@@ -58,11 +65,11 @@ public class GrillRecipe extends Recipe {
      * this is were we format a String as a JSON and return them with preheat and
      * even the grillTemp.
      */
-    public JSONObject formatAsJSON() {
-        JSONObject json = super.toJSON();
-        json.put("recipeType", "GrillRecipe");
-        json.put("preheat", preheat);
-        json.put("grillTemp", grillTemp);
+    public JsonObjectBuilder formatAsJSON() {
+        JsonObjectBuilder json = super.toJSON();
+        json.add("recipeType", "GrillRecipe");
+        json.add("preheat", preheat);
+        json.add("grillTemp", grillTemp);
         return json;
     }
 
