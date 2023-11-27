@@ -207,17 +207,17 @@ public class Recipe {
 	 * @param stdin the scanner to use
 	 * @return true if all was successful, false if there was an error
 	 */
-	protected final String OPTIONS = "0) EXIT\\n" + //
-			"1) Edit name\\n" + //
-			"2) Edit prep time\\n" + //
-			"3) Edit cook time\\n" + //
-			"4) Edit stand time (wait time)\\n" + //
-			"5) Edit ingredients list\\n" + //
-			"6) Edit kitchenware list\\n" + //
-			"7) edit description\\n" + //
-			"8) Edit steps\\n" + //
-			"9) Edit served hot\\n" + //
-			"10) Display the recipe\\n";
+	protected final String OPTIONS = "0) EXIT\n" + //
+			"1) Edit name\n" + //
+			"2) Edit prep time\n" + //
+			"3) Edit cook time\n" + //
+			"4) Edit stand time (wait time)\n" + //
+			"5) Edit ingredients list\n" + //
+			"6) Edit kitchenware list\n" + //
+			"7) edit description\n" + //
+			"8) Edit steps\n" + //
+			"9) Edit served hot\n" + //
+			"10) Display the recipe\n";
 
 	public void editRecipe(Scanner stdin) {
 		int userInput = 0;

@@ -93,8 +93,8 @@ public class GrillRecipe extends Recipe {
     }
 
     // Options String
-    protected final String OPTIONS = super.OPTIONS + "11) Edit preheat boolean\\n" + //
-            "12) Edit grill temp\\n";
+    protected final String OPTIONS = super.OPTIONS + "11) Edit preheat boolean\n" + //
+            "12) Edit grill temp\n";
 
     /**
      * Method to edit the recipe
