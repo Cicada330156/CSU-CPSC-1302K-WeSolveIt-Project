@@ -125,17 +125,17 @@ public class GrillRecipe extends Recipe {
                 boolean newPreHeat;
                 while (true) {
                     System.out.print(
-                            "What would you like to change the preheat temp to? Enter a positive integer value in Fahrenheit: ");
+                            "Will you need to preheat the grill? (Enter true or false): ");
                     try {
                         newPreHeat = stdin.nextBoolean();
                         break;
                     } catch (InputMismatchException e) {
-                        System.out.println("not a valid int");
+                        System.out.println("not a valid option (true or false)");
                     } finally {
                         stdin.nextLine();
                     }
                 }
-                System.out.println("Changing to " + newPreHeat + " degrees.");
+                System.out.println("Changing to " + newPreHeat + ".");
                 preheat = newPreHeat;
                 break;
             case 12:

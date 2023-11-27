@@ -79,6 +79,10 @@ public class RecipeBook {
 					// option 2 code block edits an existing recipe object.
 					String twoSelect = "";
 					while( ! twoSelect.equals( "0" )){
+						System.out.println("Current Recipes:");
+						for( Recipe rec : recipes ){
+							System.out.println( rec.getName());
+						}
 						System.out.print( "Enter the name of the recipe you would like to edit (or enter 0 to return): " );
 						twoSelect = echo.nextLine();
 						System.out.println( "You entered " + twoSelect );

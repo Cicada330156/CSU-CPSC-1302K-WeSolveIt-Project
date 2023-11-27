@@ -216,13 +216,13 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	public String toString() {
 		String descriptor = "";
 		descriptor += "*** " + name + " ***";
-		descriptor += "\n";
+		descriptor += "\n\n";
 		descriptor += this.getTimeAsString();
-		descriptor += "\n";
+		descriptor += "\n\n";
 		if (servedHot) {
 			descriptor += "Served hot";
 		} else {
-			descriptor += "Served cold";
+			descriptor += "Not served hot";
 		}
 		descriptor += "\n";
 		descriptor += description;
@@ -231,13 +231,13 @@ public class BakingRecipe extends Recipe implements UsesOven {
 		descriptor += "\n";
 		for (int i = 0; i < requiredKitchenware.size(); i++) {
 			descriptor += requiredKitchenware.get(i);
-			descriptor += "\n";
+			descriptor += "\n\n";
 		}
 		descriptor += "Ingredients:";
 		descriptor += "\n";
 		for (int i = 0; i < ingredients.size(); i++) {
 			descriptor += ingredients.get(i);
-			descriptor += "\n";
+			descriptor += "\n\n";
 		}
 		if (preheat) {
 			descriptor += "Preheat oven to " + ovenTemp + " degrees";
@@ -255,7 +255,7 @@ public class BakingRecipe extends Recipe implements UsesOven {
 		if (includes.size() < 0) {
 			descriptor += "\n\n\n";
 			descriptor += "Included recipes' instructions:";
-			descriptor += "\n";
+			descriptor += "\n\n";
 			for (int i = 0; i < includes.size(); i++) {
 				descriptor += (i + ")\t" + includes.get(i).toString());
 				descriptor += "\n";
