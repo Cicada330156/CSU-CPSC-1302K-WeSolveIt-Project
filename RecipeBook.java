@@ -37,15 +37,9 @@ public class RecipeBook {
 				case "1":
 					// option 1 code block creates a new recipe object.
 					String oneSelect = "";
-<<<<<<< HEAD
 					while( ! oneSelect.equals( "0" )){
 						System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back" );
 						System.out.print( "Please make a selection (A, B, C, or 0): " );
-=======
-					while (!oneSelect.equals("0")) {
-						System.out.println("Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back");
-						System.out.print("Please make a selection (A, B, C, or D): ");
->>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 						oneSelect = echo.nextLine();
 
 						if (oneSelect.equalsIgnoreCase("A")) {
@@ -60,7 +54,6 @@ public class RecipeBook {
 							System.out.print("Please enter the name of the Grill Recipe: ");
 							oneSelect = echo.nextLine();
 							Recipe newRecipe = new GrillRecipe(oneSelect);
-<<<<<<< HEAD
 							System.out.println(" New Grill Recipe added: " + newRecipe.getName() );
 							recipes.add( newRecipe );
 						}
@@ -74,19 +67,6 @@ public class RecipeBook {
 						}
 						else if( oneSelect.equalsIgnoreCase( "0" )){
 							System.out.println( "Returning to main options menu." );
-=======
-							System.out.println(" New Grill Recipe added: " + newRecipe.getName());
-							// recipes.add( oneSelect );
-						} else if (oneSelect.equalsIgnoreCase("C")) {
-							System.out.println("You have selected 'Stovetop'.");
-							System.out.print("Please enter the name of the Stovetop Recipe: ");
-							oneSelect = echo.nextLine();
-							Recipe newRecipe = new StovetopRecipe(oneSelect);
-							System.out.println("New Stovetop Recipe added: " + newRecipe.getName());
-							// recipes.add( oneSelect );
-						} else if (oneSelect.equalsIgnoreCase("D")) {
-							System.out.println("Returning to main options menu.");
->>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 							break;
 						} else {
 							System.out.println(oneSelect + " is not a valid option.");
@@ -97,7 +77,6 @@ public class RecipeBook {
 				case "2":
 					// option 2 code block edits an existing recipe object.
 					String twoSelect = "";
-<<<<<<< HEAD
 					while( ! twoSelect.equals( "0" )){
 						System.out.print( "Enter the name of the recipe you would like to edit (or enter 0 to return): " );
 						twoSelect = echo.nextLine();
@@ -110,11 +89,6 @@ public class RecipeBook {
 						System.out.println( "ERROR: Recipe not found." );
 					}
 					twoSelect = "";
-=======
-					System.out.print("Enter the name of the recipe you would like to edit: ");
-					twoSelect = echo.nextLine();
-					System.out.println("You entered " + twoSelect);
->>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 					break;
 				case "3":
 					// option 3 code block displays a recipe.
