@@ -33,6 +33,18 @@ public class Recipe {
 	 * Empty Constructor.
 	 */
 	public Recipe() {
+		name = "";
+		description = "";
+		cookTime = 0;
+		standTime = 0;
+		ingredients = new ArrayList<String>();
+		requiredKitchenware = new ArrayList<String>();
+		includes = new ArrayList<Recipe>();
+		description = "";
+		steps = new ArrayList<String>();
+		servedHot = true;
+	}
+
 	}
 
 	/**
@@ -42,19 +54,8 @@ public class Recipe {
 	 * @param name the name of this new recipe
 	 */
 	public Recipe(String name) {
-		this(name, "");
-	}
-
-	/**
-	 * Instantiates the object with a name and description. Sets all other Strings
-	 * to "" and all other ints to 0. Instantiates empty ArrayLists.
-	 * 
-	 * @param name        The name of this new recipe
-	 * @param description The full length description of this recipe's product
-	 */
-	public Recipe(String name, String description) {
 		this.name = name;
-		this.description = description;
+		description = "";
 		cookTime = 0;
 		standTime = 0;
 		ingredients = new ArrayList<String>();
@@ -97,6 +98,14 @@ public class Recipe {
 			}
 		}
 		servedHot = myJsonObj.getBoolean("servedHot");
+	}
+
+	public void setName(String nameString) {
+		name = nameString;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	protected static int getAnInt(Scanner stdin) {
@@ -200,7 +209,16 @@ public class Recipe {
 	 * @param stdin the scanner to use
 	 * @return true if all was successful, false if there was an error
 	 */
-	protected final String OPTIONS = "";
+	protected final String OPTIONS = "1) Edit name\\n" + //
+			"2) Edit prep time\\n" + //
+			"3) Edit cook time\\n" + //
+			"4) Edit stand time (wait time)\\n" + //
+			"5) Edit ingredients list\\n" + //
+			"6) Edit kitchenware list\\n" + //
+			"7) edit description\\n" + //
+			"8) Edit steps\\n" + //
+			"9) Edit served hot\\n" + //
+			"10) Display the recipe";
 
 	public void editRecipe(Scanner stdin) {
 		int userInput = 0;
