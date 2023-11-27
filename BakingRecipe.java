@@ -22,6 +22,10 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	public BakingRecipe() {
 	}
 
+	public BakingRecipe(String name) {
+		super(name);
+	}
+
 	public BakingRecipe(JsonObject myJsonObj) {
 		super(myJsonObj);
 		preheat = myJsonObj.getBoolean("preheat");
@@ -84,7 +88,8 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	}
 
 	// Options String
-	protected final String OPTIONS = super.OPTIONS + "";
+	protected final String OPTIONS = super.OPTIONS + "11) Edit preheat boolean\\n" + //
+			"12) Edit oven temp\\n";
 
 	/**
 	 * Asks the user what they would like to edit, and changes it for them.
