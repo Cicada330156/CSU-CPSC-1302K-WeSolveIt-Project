@@ -24,7 +24,7 @@ public class RecipeBook{
 		// ArrayList<String> recipes = new ArrayList<String>();
 
 		String select = "";
-		while( ! select.equals( "5" )){
+		while( ! select.equals( "0" )){
 			for( int i = 0; i < optionsMenu.size(); i++ ){
 				System.out.println( optionsMenu.get( i ));
 			}
@@ -35,17 +35,18 @@ public class RecipeBook{
 				case "1":
 					// option 1 code block creates a new recipe object.
 					String oneSelect = "";
-					while( ! oneSelect.equalsIgnoreCase( "D" )){
-						System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \nD) Back" );
+					while( ! oneSelect.equals( "0" )){
+						System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back" );
 						System.out.print( "Please make a selection (A, B, C, or D): " );
 						oneSelect = echo.nextLine();
 
 						if( oneSelect.equalsIgnoreCase("A")){
 							System.out.println( "You have selected 'Oven'.");
-							Recipe newRecipe = new BakingRecipe();
 							System.out.print( "Please enter the name of the Oven Recipe: " );
 							oneSelect = echo.nextLine();
-							// recipes.add( oneSelect );
+							Recipe newRecipe = new BakingRecipe( oneSelect );
+							System.out.println( "New Baking Recipe added: " + newRecipe.getName() );
+							recipes.add( newRecipe );
 						}
 						else if( oneSelect.equalsIgnoreCase( "B" )){
 							System.out.println( "You have selected 'Grill'." );
