@@ -123,25 +123,23 @@ public class BakingRecipe extends Recipe implements UsesOven {
 			case 11:
 				boolean newPreHeat;
 				while (true) {
-					System.out.print(
-							"What would you like to change the preheat temp to? Enter a positive integer value in Fahrenheit: ");
+					System.out.print("Will you need to preheat the oven for this Recipe? (enter true or false): ");
 					try {
 						newPreHeat = stdin.nextBoolean();
 						break;
 					} catch (InputMismatchException e) {
-						System.out.println("not a valid int");
+						System.out.println("not a valid option");
 					} finally {
 						stdin.nextLine();
 					}
 				}
-				System.out.println("Changing to " + newPreHeat + " degrees.");
+				System.out.println("Changing preheat option to " + newPreHeat + ".");
 				preheat = newPreHeat;
 				break;
 			case 12:
 				int newOvenTemp = -1;
 				while (newOvenTemp < 0) {
-					System.out.print(
-							"What would you like to change the preheat temp to? Enter a positive integer value in Fahrenheit: ");
+					System.out.print("What would you like to change the preheat temp to? Enter a positive integer value in Fahrenheit: ");
 					try {
 						newOvenTemp = stdin.nextInt();
 					} catch (InputMismatchException e) {
