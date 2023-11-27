@@ -34,6 +34,12 @@ public class StovetopRecipe extends Recipe {
         this.potType = potType;
     }
 
+    public StovetopRecipe(){
+	    super();
+	    temp = "";
+	    potType = "";
+    }
+
     // Getters and Setters
     /**
      * We will use the get method to use the getTemp to return the temp.

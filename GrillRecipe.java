@@ -29,6 +29,11 @@ public class GrillRecipe extends Recipe {
         grillTemp = myJsonObj.getInt("grillTemp");
     }
 
+    public GrillRecipe() {
+	    this.preheat = true;
+	    this.grillTemp = -1;
+    }
+
     // Getter and Setter methods
     /**
      * This is where we use a get method for the preheat to return.
