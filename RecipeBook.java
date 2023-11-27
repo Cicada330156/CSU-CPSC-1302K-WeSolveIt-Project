@@ -18,7 +18,7 @@ public class RecipeBook{
 		optionsMenu.add( "2) Edit a recipe" );
 		optionsMenu.add( "3) List a recipe" );
 		optionsMenu.add( "4) List all recipes" );
-		optionsMenu.add( "5) Quit" );
+		optionsMenu.add( "0) Quit" );
 
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		// ArrayList<String> recipes = new ArrayList<String>();
@@ -49,14 +49,14 @@ public class RecipeBook{
 						}
 						else if( oneSelect.equalsIgnoreCase( "B" )){
 							System.out.println( "You have selected 'Grill'." );
-							// Recipe newRecipe = new GrillRecipe();
+							Recipe newRecipe = new GrillRecipe();
 							System.out.print( "Please enter the name of the Grill recipe: " );
 							oneSelect = echo.nextLine();
 							// recipes.add( oneSelect );
 						}
 						else if( oneSelect.equalsIgnoreCase( "C" )){
 							System.out.println( "You have selected 'Stovetop'." );
-							// Recipe newRecipe = new StovetopRecipe();
+							Recipe newRecipe = new StovetopRecipe();
 							System.out.print( "Please enter the name of the Stovetop Recipe: " );
 							oneSelect = echo.nextLine();
 							// recipes.add( oneSelect );
@@ -98,7 +98,7 @@ public class RecipeBook{
 					}
 					System.out.println();
 					break;
-				case "5":
+				case "0":
 					// option 5 code block closes the program.
 					System.out.println( "Goodbye!" );
 					break;
