@@ -23,7 +23,7 @@ public class Recipe {
 	protected ArrayList<String> steps;
 	protected boolean servedHot;
 
-	// Recipe(), Recipe(JsonObject), OPTIONS Strings
+	// Recipe(), Recipe(JsonObject), OPTIONS Strings, includes for Json
 	/**************************************************************************************
 	 * https://docs.oracle.com/javaee/7/api/javax/json/JsonWriter.html
 	 * https://docs.oracle.com/middleware/1213/wls/WLPRG/java-api-for-json-proc.htm#WLPRG1061
@@ -76,20 +76,25 @@ public class Recipe {
 		cookTime = myJsonObj.getInt("cookTime");
 		standTime = myJsonObj.getInt("standTime");
 		for (JsonValue val : myJsonObj.getJsonArray("ingredients")) {
-			ingredients.add(val);
+			if (val.getValueType().equals("STRING")) {
+				ingredients.add(((JsonString) val).getString());
+			}
 		}
 		for (JsonValue val : myJsonObj.getJsonArray("requiredKitchenware")) {
-			requiredKitchenware.add(val);
+			if (val.getValueType().equals("STRING")) {
+				requiredKitchenware.add(((JsonString) val).getString());
+			}
 		}
-		for (JsonValue val : myJsonObj.getJsonArray("includes")) {// needs attention
-			includes.add(val);
-		}
-		for (JsonValue val : myJsonObj.getJsonArray(ingredients)) {
-			ingredients.add(val);
+		for (JsonValue val : myJsonObj.getJsonArray("ingredients")) {
+			if (val.getValueType().equals("STRING")) {
+				ingredients.add(((JsonString) val).getString());
+			}
 		}
 		description = myJsonObj.getString("description");
 		for (JsonValue val : myJsonObj.getJsonArray("steps")) {
-			steps.add(val);
+			if (val.getValueType().equals("STRING")) {
+				steps.add(((JsonString) val).getString());
+			}
 		}
 		servedHot = myJsonObj.getBoolean("servedHot");
 	}
