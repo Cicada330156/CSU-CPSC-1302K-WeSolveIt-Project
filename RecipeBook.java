@@ -1,3 +1,4 @@
+
 /**
  * Driver code that implements the Recipe class.
  *
@@ -6,53 +7,60 @@
  */
 import java.util.Scanner;
 import java.util.ArrayList;
-public class RecipeBook{
 
-	public static void main( String[] args ){
-		System.out.println( "Welcome to your recipe manager!\n" );
-		
-		Scanner echo = new Scanner( System.in );
+public class RecipeBook {
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to your recipe manager!\n");
+
+		Scanner echo = new Scanner(System.in);
 		ArrayList<String> optionsMenu = new ArrayList<String>();
-		optionsMenu.add( "Options:" );
-		optionsMenu.add( "1) Add a recipe" );
-		optionsMenu.add( "2) Edit a recipe" );
-		optionsMenu.add( "3) List a recipe" );
-		optionsMenu.add( "4) List all recipes" );
-		optionsMenu.add( "0) Quit" );
+		optionsMenu.add("Options:");
+		optionsMenu.add("1) Add a recipe");
+		optionsMenu.add("2) Edit a recipe");
+		optionsMenu.add("3) List a recipe");
+		optionsMenu.add("4) List all recipes");
+		optionsMenu.add("0) Quit");
 
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		// ArrayList<String> recipes = new ArrayList<String>();
 
 		String select = "";
-		while( ! select.equals( "0" )){
-			for( int i = 0; i < optionsMenu.size(); i++ ){
-				System.out.println( optionsMenu.get( i ));
+		while (!select.equals("0")) {
+			for (int i = 0; i < optionsMenu.size(); i++) {
+				System.out.println(optionsMenu.get(i));
 			}
-			System.out.print( "Please select from the following options: " );
+			System.out.print("Please select from the following options: ");
 			select = echo.nextLine();
 
-			switch( select ){
+			switch (select) {
 				case "1":
 					// option 1 code block creates a new recipe object.
 					String oneSelect = "";
+<<<<<<< HEAD
 					while( ! oneSelect.equals( "0" )){
 						System.out.println( "Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back" );
 						System.out.print( "Please make a selection (A, B, C, or 0): " );
+=======
+					while (!oneSelect.equals("0")) {
+						System.out.println("Will you be using: \nA) An Oven \nB) A Grill \nC) A Stovetop \n0) Back");
+						System.out.print("Please make a selection (A, B, C, or D): ");
+>>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 						oneSelect = echo.nextLine();
 
-						if( oneSelect.equalsIgnoreCase("A")){
-							System.out.println( "You have selected 'Oven'.");
-							System.out.print( "Please enter the name of the Baking Recipe: " );
+						if (oneSelect.equalsIgnoreCase("A")) {
+							System.out.println("You have selected 'Oven'.");
+							System.out.print("Please enter the name of the Baking Recipe: ");
 							oneSelect = echo.nextLine();
-							Recipe newRecipe = new BakingRecipe( oneSelect );
-							System.out.println( "New Baking Recipe added: " + newRecipe.getName() );
-							recipes.add( newRecipe );
-						}
-						else if( oneSelect.equalsIgnoreCase( "B" )){
-							System.out.println( "You have selected 'Grill'." );
-							System.out.print( "Please enter the name of the Grill Recipe: " );
+							Recipe newRecipe = new BakingRecipe(oneSelect);
+							System.out.println("New Baking Recipe added: " + newRecipe.getName());
+							recipes.add(newRecipe);
+						} else if (oneSelect.equalsIgnoreCase("B")) {
+							System.out.println("You have selected 'Grill'.");
+							System.out.print("Please enter the name of the Grill Recipe: ");
 							oneSelect = echo.nextLine();
 							Recipe newRecipe = new GrillRecipe(oneSelect);
+<<<<<<< HEAD
 							System.out.println(" New Grill Recipe added: " + newRecipe.getName() );
 							recipes.add( newRecipe );
 						}
@@ -66,17 +74,30 @@ public class RecipeBook{
 						}
 						else if( oneSelect.equalsIgnoreCase( "0" )){
 							System.out.println( "Returning to main options menu." );
+=======
+							System.out.println(" New Grill Recipe added: " + newRecipe.getName());
+							// recipes.add( oneSelect );
+						} else if (oneSelect.equalsIgnoreCase("C")) {
+							System.out.println("You have selected 'Stovetop'.");
+							System.out.print("Please enter the name of the Stovetop Recipe: ");
+							oneSelect = echo.nextLine();
+							Recipe newRecipe = new StovetopRecipe(oneSelect);
+							System.out.println("New Stovetop Recipe added: " + newRecipe.getName());
+							// recipes.add( oneSelect );
+						} else if (oneSelect.equalsIgnoreCase("D")) {
+							System.out.println("Returning to main options menu.");
+>>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 							break;
-						}
-						else{
-							System.out.println( oneSelect + " is not a valid option." );
+						} else {
+							System.out.println(oneSelect + " is not a valid option.");
 						}
 						oneSelect = "";
 					}
-						break;
+					break;
 				case "2":
 					// option 2 code block edits an existing recipe object.
 					String twoSelect = "";
+<<<<<<< HEAD
 					while( ! twoSelect.equals( "0" )){
 						System.out.print( "Enter the name of the recipe you would like to edit (or enter 0 to return): " );
 						twoSelect = echo.nextLine();
@@ -89,37 +110,44 @@ public class RecipeBook{
 						System.out.println( "ERROR: Recipe not found." );
 					}
 					twoSelect = "";
+=======
+					System.out.print("Enter the name of the recipe you would like to edit: ");
+					twoSelect = echo.nextLine();
+					System.out.println("You entered " + twoSelect);
+>>>>>>> 2f90a4b85947385ceeb4816da62cf2222ebd2514
 					break;
 				case "3":
 					// option 3 code block displays a recipe.
 					String threeSelect = "";
-					System.out.print( "Enter the name of the recipe you would like to display: " );
+					System.out.print("Enter the name of the recipe you would like to display: ");
 					threeSelect = echo.nextLine();
-					System.out.println( "You entered " + threeSelect );
+					System.out.println("You entered " + threeSelect);
 					System.out.println();
-					if( recipes.contains( threeSelect )){
-						System.out.println( threeSelect );
+					for (Recipe currentRecipe : recipes) {
+						if (currentRecipe.getName().equals(threeSelect)) {
+							System.out.println(currentRecipe);
+							break;
+						}
 					}
-					System.out.println();
+					System.out.println("Not a recipe here.");
 					break;
 				case "4":
 					// option 4 code block displays all recipes.
-					System.out.println( "This code will display every recipe object." );
+					System.out.println("This code will display every recipe object.");
 					System.out.println();
-					for( int i = 0; i < recipes.size(); i++ ){
-						System.out.println( recipes.get( i ));
+					for (int i = 0; i < recipes.size(); i++) {
+						System.out.println(recipes.get(i));
 					}
 					System.out.println();
 					break;
 				case "0":
 					// option 5 code block closes the program.
-					System.out.println( "Goodbye!" );
+					System.out.println("Goodbye!");
 					break;
 				default:
-					System.out.println( "Sorry, not a valid option." );
+					System.out.println("Sorry, not a valid option.");
 					break;
 			}
 		}
 	}
 }
-
