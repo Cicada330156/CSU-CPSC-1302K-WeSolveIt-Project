@@ -23,6 +23,12 @@ public class GrillRecipe extends Recipe {
         this.grillTemp = grillTemp;
     }
 
+    public GrillRecipe(String name) {
+        super(name);
+        this.preheat = true;
+        this.grillTemp = -1;
+    }
+
     public GrillRecipe(JsonObject myJsonObj) {
         super(myJsonObj);
         preheat = myJsonObj.getBoolean("preheat");
@@ -30,8 +36,8 @@ public class GrillRecipe extends Recipe {
     }
 
     public GrillRecipe() {
-	    this.preheat = true;
-	    this.grillTemp = -1;
+        this.preheat = true;
+        this.grillTemp = -1;
     }
 
     // Getter and Setter methods
@@ -87,7 +93,8 @@ public class GrillRecipe extends Recipe {
     }
 
     // Options String
-    protected final String OPTIONS = super.OPTIONS + "";
+    protected final String OPTIONS = super.OPTIONS + "11) Edit preheat boolean\\n" + //
+            "12) Edit grill temp\\n";
 
     /**
      * Method to edit the recipe

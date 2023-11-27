@@ -34,10 +34,10 @@ public class StovetopRecipe extends Recipe {
         this.potType = potType;
     }
 
-    public StovetopRecipe(){
-	    super();
-	    temp = "";
-	    potType = "";
+    public StovetopRecipe() {
+        super();
+        temp = "";
+        potType = "";
     }
 
     // Getters and Setters
@@ -94,7 +94,8 @@ public class StovetopRecipe extends Recipe {
     }
 
     // Options String
-    protected final String OPTIONS = super.OPTIONS + "";
+    protected final String OPTIONS = super.OPTIONS + "11) Edit stove temp\\n" + //
+            "Edit pot type\\n";
 
     /**
      * Asks the user what they would like to edit, and changes it for them.
