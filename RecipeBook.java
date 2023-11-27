@@ -42,7 +42,7 @@ public class RecipeBook{
 
 						if( oneSelect.equalsIgnoreCase("A")){
 							System.out.println( "You have selected 'Oven'.");
-							System.out.print( "Please enter the name of the Oven Recipe: " );
+							System.out.print( "Please enter the name of the Baking Recipe: " );
 							oneSelect = echo.nextLine();
 							Recipe newRecipe = new BakingRecipe( oneSelect );
 							System.out.println( "New Baking Recipe added: " + newRecipe.getName() );
@@ -50,16 +50,18 @@ public class RecipeBook{
 						}
 						else if( oneSelect.equalsIgnoreCase( "B" )){
 							System.out.println( "You have selected 'Grill'." );
-							Recipe newRecipe = new GrillRecipe();
-							System.out.print( "Please enter the name of the Grill recipe: " );
+							System.out.print( "Please enter the name of the Grill Recipe: " );
 							oneSelect = echo.nextLine();
+							Recipe newRecipe = new GrillRecipe(oneSelect);
+							System.out.println(" New Grill Recipe added: " + newRecipe.getName() );
 							// recipes.add( oneSelect );
 						}
 						else if( oneSelect.equalsIgnoreCase( "C" )){
 							System.out.println( "You have selected 'Stovetop'." );
-							Recipe newRecipe = new StovetopRecipe();
 							System.out.print( "Please enter the name of the Stovetop Recipe: " );
 							oneSelect = echo.nextLine();
+							Recipe newRecipe = new StovetopRecipe(oneSelect);
+							System.out.println( "New Stovetop Recipe added: " + newRecipe.getName() );
 							// recipes.add( oneSelect );
 						}
 						else if( oneSelect.equalsIgnoreCase( "D" )){
@@ -69,6 +71,7 @@ public class RecipeBook{
 						else{
 							System.out.println( oneSelect + " is not a valid option." );
 						}
+						oneSelect = "";
 					}
 						break;
 				case "2":

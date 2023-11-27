@@ -45,8 +45,6 @@ public class Recipe {
 		servedHot = true;
 	}
 
-	}
-
 	/**
 	 * Instantiates object with only a name. Calls the Recipe(String name, String
 	 * description) as Recipe(name, "")

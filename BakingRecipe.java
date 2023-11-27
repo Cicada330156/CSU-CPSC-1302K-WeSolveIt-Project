@@ -20,12 +20,17 @@ public class BakingRecipe extends Recipe implements UsesOven {
 
 	// constructors
 	public BakingRecipe() {
+
 	}
 
 	public BakingRecipe(JsonObject myJsonObj) {
 		super(myJsonObj);
 		preheat = myJsonObj.getBoolean("preheat");
 		ovenTemp = myJsonObj.getInt("ovenTemp");
+	}
+
+	public BakingRecipe( String name ){
+		this.name = name;
 	}
 
 	// Getters and setters
