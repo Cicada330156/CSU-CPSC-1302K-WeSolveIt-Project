@@ -20,8 +20,8 @@ public class RecipeBook{
 		optionsMenu.add( "4) List all recipes" );
 		optionsMenu.add( "5) Quit" );
 
-		// ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-		ArrayList<String> recipes = new ArrayList<String>();
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		// ArrayList<String> recipes = new ArrayList<String>();
 
 		String select = "";
 		while( ! select.equals( "5" )){
@@ -42,24 +42,24 @@ public class RecipeBook{
 
 						if( oneSelect.equalsIgnoreCase("A")){
 							System.out.println( "You have selected 'Oven'.");
-							// Recipe newRecipe = new BakingRecipe();
+							Recipe newRecipe = new BakingRecipe();
 							System.out.print( "Please enter the name of the Oven Recipe: " );
 							oneSelect = echo.nextLine();
-							recipes.add( oneSelect );
+							// recipes.add( oneSelect );
 						}
 						else if( oneSelect.equalsIgnoreCase( "B" )){
 							System.out.println( "You have selected 'Grill'." );
 							// Recipe newRecipe = new GrillRecipe();
 							System.out.print( "Please enter the name of the Grill recipe: " );
 							oneSelect = echo.nextLine();
-							recipes.add( oneSelect );
+							// recipes.add( oneSelect );
 						}
 						else if( oneSelect.equalsIgnoreCase( "C" )){
 							System.out.println( "You have selected 'Stovetop'." );
 							// Recipe newRecipe = new StovetopRecipe();
 							System.out.print( "Please enter the name of the Stovetop Recipe: " );
 							oneSelect = echo.nextLine();
-							recipes.add( oneSelect );
+							// recipes.add( oneSelect );
 						}
 						else if( oneSelect.equalsIgnoreCase( "D" )){
 							System.out.println( "Returning to main options menu." );

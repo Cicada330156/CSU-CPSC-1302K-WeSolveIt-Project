@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
-import org.json.simple.*;
+import javax.json.*;
 
 /**
  * for the BakingRecipe we will extend recipe implements uses oven
@@ -66,8 +66,8 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	 * @return this object, stored in the JSON format
 	 */
 	@Override
-	public JSONObject formatAsJSON() {
-		JSONObject json = super.toJSON();
+	public JsonObjectBuilder formatAsJSON() {
+		JsonObjectBuilder json = super.formatAsJSON();
 		json.put("recipeType", "BakingRecipe");
 		json.put("preheat", preheat);
 		json.put("ovenTemp", ovenTemp);

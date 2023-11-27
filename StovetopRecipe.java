@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
-import org.json.simple.*;
+import javax.json.*;
 
 /**
  * This class will uses extend, temp Strings, pot types, methods that
