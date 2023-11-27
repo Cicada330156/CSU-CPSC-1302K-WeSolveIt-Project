@@ -1,5 +1,9 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import java.io.*;
 import org.json.simple.*;
 
@@ -18,6 +22,13 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	// Instance variables
 	protected boolean preheat;
 	protected int ovenTemp;
+
+	// constructors
+	public BakingRecipe(JsonObject myJsonObj) {
+		super(myJsonObj);
+		preheat = myJsonObj.getBoolean("preheat");
+		ovenTemp = myJsonObj.getInt("ovenTemp");
+	}
 
 	// Getters and setters
 	/**
@@ -66,11 +77,11 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	 * @return this object, stored in the JSON format
 	 */
 	@Override
-	public JSONObject formatAsJSON() {
-		JSONObject json = super.toJSON();
-		json.put("recipeType", "BakingRecipe");
-		json.put("preheat", preheat);
-		json.put("ovenTemp", ovenTemp);
+	public JsonObjectBuilder formatAsJSON() {
+		JsonObjectBuilder json = super.toJSON();
+		json.add("recipeType", "BakingRecipe");
+		json.add("preheat", preheat);
+		json.add("ovenTemp", ovenTemp);
 		return json;
 	}
 
