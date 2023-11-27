@@ -19,6 +19,9 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	protected int ovenTemp;
 
 	// constructors
+	public BakingRecipe() {
+	}
+
 	public BakingRecipe(JsonObject myJsonObj) {
 		super(myJsonObj);
 		preheat = myJsonObj.getBoolean("preheat");

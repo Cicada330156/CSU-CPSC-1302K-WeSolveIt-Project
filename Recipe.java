@@ -30,21 +30,9 @@ public class Recipe {
 	 ***************************************************************************************/
 
 	/**
-	 * Asks the user for information to instantiate the object with.
+	 * Empty Constructor.
 	 */
 	public Recipe() {
-		/*
-	name
-	prepTime
-	cookTime
-	standTime
-	ingredients
-	requiredKitchenware
-	includes
-	description
-	steps
-	servedHot
-	*/
 	}
 
 	/**
@@ -82,7 +70,7 @@ public class Recipe {
 	 * 
 	 * @param JsonRepresentation the JsonObject representation of the object
 	 */
-	public Recipe (JsonObject myJsonObj) {
+	public Recipe(JsonObject myJsonObj) {
 		name = myJsonObj.getString("name");
 		prepTime = myJsonObj.getInt("prepTime");
 		cookTime = myJsonObj.getInt("cookTime");
@@ -93,7 +81,7 @@ public class Recipe {
 		for (JsonValue val : myJsonObj.getJsonArray("requiredKitchenware")) {
 			requiredKitchenware.add(val);
 		}
-		for (JsonValue val : myJsonObj.getJsonArray("includes")) {//needs attention
+		for (JsonValue val : myJsonObj.getJsonArray("includes")) {// needs attention
 			includes.add(val);
 		}
 		for (JsonValue val : myJsonObj.getJsonArray(ingredients)) {
@@ -151,7 +139,7 @@ public class Recipe {
 	 */
 	protected String getTimeAsString() {
 		return "Total time: " + (prepTime + cookTime + standTime) + "\nPrep time: " + prepTime + "\nCook time: "
-			+ cookTime + "\nStand time: " + standTime;
+				+ cookTime + "\nStand time: " + standTime;
 	}
 
 	/**
