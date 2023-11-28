@@ -8,6 +8,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+// case 2: inform user when their inputted recipe is not in recipe ArrayList
 public class RecipeBook {
 
 	public static void main(String[] args) {
