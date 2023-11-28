@@ -3,15 +3,11 @@ import java.util.Scanner;
 import javax.json.*;
 
 /**
- * for the BakingRecipe we will extend recipe implements uses oven
- * I will also use boolean preheat, oven temp, methods that are not overridden
- * that is get set instance variables
- * THen I will override these with format as JSON, toStrig, equals, and
- * editRecipe
+ * for the BakingRecipe we will extend recipe and implement uses oven.
+ * Additionally, we add preheat and ovenTemp variables.
  * 
  * @author Ryan McKelphin
  * @version 1.1
- *
  */
 public class BakingRecipe extends Recipe implements UsesOven {
 	// Instance variables
@@ -19,18 +15,35 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	protected int ovenTemp;
 
 	// constructors
+	/**
+	 * Constructs the object as in @see Recipe()
+	 * sets preheat to true and ovenTemp to a placeholder value of -1
+	 */
 	public BakingRecipe() {
 		super();
 		preheat = true;
 		ovenTemp = -1;
 	}
 
+	/**
+	 * Calls the parent Recipe(String name)
+	 * sets preheat to true and ovenTemp to a placeholder of -1
+	 * 
+	 * @param name the name of the new Recipe
+	 */
 	public BakingRecipe(String name) {
 		super(name);
 		preheat = true;
 		ovenTemp = -1;
 	}
 
+	/**
+	 * Instantiates the object based on its JsonObject representation
+	 * 
+	 * @throws javax.json.JsonException if the name does not load correctly. Else,
+	 *                                  prints an error to console and moves on.
+	 * @param JsonRepresentation the JsonObject representation of the object
+	 */
 	public BakingRecipe(JsonObject myJsonObj) throws javax.json.JsonException {
 		super(myJsonObj);
 		try {
@@ -57,9 +70,9 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	}
 
 	/**
-	 * this is where we will set the preheat as a boolean.
+	 * this is where we will set the boolean preheat.
 	 * 
-	 * @param preheat whether this recipe should require preheat
+	 * @param preheat whether this recipe should require a preheated oven
 	 */
 	@Override
 	public void setPreheat(boolean preheat) {
@@ -67,7 +80,7 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	}
 
 	/**
-	 * this is where we will return the ovenTemp and have a int getOvenTemp
+	 * this is where we will return the int ovenTemp
 	 * 
 	 * @return the temperature to set the oven to
 	 */
@@ -76,7 +89,7 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	}
 
 	/**
-	 * this is where we will set the OvenTemp as a int and then call it as such.
+	 * this is where we will set the int OvenTemp
 	 * 
 	 * @param ovenTemp the temperature which the oven should be set to for this
 	 *                 recipe
@@ -85,7 +98,7 @@ public class BakingRecipe extends Recipe implements UsesOven {
 		this.ovenTemp = ovenTemp;
 	}
 
-	// Overridden methods VVV
+	// OVERRIDDEN METHODS
 	/**
 	 * Formats the values of the object in the JSON format
 	 * 
@@ -171,10 +184,10 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	}
 
 	/**
-	 * checks if this recipe is equal to another recipe object
+	 * checks if this recipe is equal to another object
 	 * 
 	 * @param otherRecipe the other recipe to compare to
-	 * @return true is the two are the same, false if not
+	 * @return true if the two are the same, false if not
 	 */
 	public boolean equals(Object compareTo) {
 		if (compareTo.getClass() != BakingRecipe.class) {
@@ -211,17 +224,8 @@ public class BakingRecipe extends Recipe implements UsesOven {
 	}
 
 	/**
-	 * returns a String representation of the object, formatted as follows:
-	 * <ul>
-	 * <li>the name of the recipe</li>
-	 * <li>the time the recipe will take, as formatted by getTimeAsString()</li>
-	 * <li>ingredients, as a table</li>
-	 * <li>required cookware, as a list</li>
-	 * <li>The description of the recipe</li>
-	 * <li>whether or not this is served hot</li>
-	 * <li>the list of steps to take</li>
-	 * <li>any other recipes included in this one, laid out in the same format</li>
-	 * </ul>
+	 * returns a String representation of the object, formatted as to be displayed
+	 * to the end user.
 	 * 
 	 * @return the String representation of this recipe
 	 */

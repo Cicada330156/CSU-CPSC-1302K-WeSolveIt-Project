@@ -58,7 +58,7 @@ public class Recipe {
 	}
 
 	/**
-	 * Instantiates the object baseed on a JsonObject representation of it
+	 * Instantiates the object based on its JsonObject representation
 	 * 
 	 * @throws javax.json.JsonException if the name does not load correctly. Else,
 	 *                                  prints an error to console and moves on.
@@ -336,7 +336,7 @@ public class Recipe {
 				for (int i = 0; i < ingredients.size(); i++) {
 					System.out.println(i + "\t" + ingredients.get(i).toString());
 				}
-				while ( ! answer.equals( "exit")) {
+				while (!answer.equals("exit")) {
 					System.out.println("would you like to [add], [edit], or [delete] an ingredient or [exit]?");
 					answer = stdin.nextLine().toLowerCase();
 					switch (answer) {
@@ -347,6 +347,9 @@ public class Recipe {
 						case "edit":// could use updating
 							System.out.println("What index would you like to edit? (listed above)");
 							int indexToEdit = getAnInt(stdin);
+							if (indexToEdit == -1) {
+								break;
+							}
 							try {
 								ingredients.get(indexToEdit);
 								System.out.println("What would you like to change it to?");
@@ -358,6 +361,9 @@ public class Recipe {
 						case "delete":
 							System.out.println("What index would you like to delete? (listed above)");
 							int indexToDelete = getAnInt(stdin);
+							if (indexToDelete == -1) {
+								break;
+							}
 							try {
 								ingredients.remove(indexToDelete);
 							} catch (IndexOutOfBoundsException e) {
@@ -365,7 +371,7 @@ public class Recipe {
 							}
 							break;
 						case "exit":
-							System.out.println( "Returning to options." );
+							System.out.println("Returning to options.");
 							break;
 						default:
 							System.out.println(
@@ -384,7 +390,7 @@ public class Recipe {
 				}
 				System.out.println("would you like to [add], [edit], or [delete] a piece of kitchenware or [exit]?");
 				answer = stdin.nextLine().toLowerCase();
-				while ( ! answer.equals( "exit" )) {
+				while (!answer.equals("exit")) {
 					switch (answer) {
 						case "add":
 							System.out.println("What kitchenware would you like to add?");
@@ -393,6 +399,9 @@ public class Recipe {
 						case "edit":// could use updating
 							System.out.println("What index would you like to edit? (listed above)");
 							int indexToEdit = getAnInt(stdin);
+							if (indexToEdit == -1) {
+								break;
+							}
 							try {
 								requiredKitchenware.get(indexToEdit);
 								System.out.println("What would you like to change it to?");
@@ -404,6 +413,9 @@ public class Recipe {
 						case "delete":
 							System.out.println("What index would you like to delete? (listed above)");
 							int indexToDelete = getAnInt(stdin);
+							if (indexToDelete == -1) {
+								break;
+							}
 							try {
 								requiredKitchenware.remove(indexToDelete);
 							} catch (IndexOutOfBoundsException e) {
@@ -434,15 +446,18 @@ public class Recipe {
 				}
 				System.out.println("would you like to [add], [edit], or [delete] a step or [exit]?");
 				answer = stdin.nextLine().toLowerCase();
-				while (! answer.equals( "exit") ) {
+				while (!answer.equals("exit")) {
 					switch (answer) {
 						case "add":
 							System.out.println("What step would you like to add?");
 							steps.add(stdin.nextLine());
 							break;
 						case "edit":// could use updating
-							System.out.println("What index would you like to edit? (listed above)");
+							System.out.println("What index would you like to edit? (listed above). Enter -1 to abort.");
 							int indexToEdit = getAnInt(stdin);
+							if (indexToEdit == -1) {
+								break;
+							}
 							try {
 								steps.get(indexToEdit);
 								System.out.println("What would you like to change it to?");
@@ -452,8 +467,12 @@ public class Recipe {
 							}
 							break;
 						case "delete":
-							System.out.println("What index would you like to delete? (listed above)");
+							System.out
+									.println("What index would you like to delete? (listed above). Enter -1 to abort.");
 							int indexToDelete = getAnInt(stdin);
+							if (indexToDelete == -1) {
+								break;
+							}
 							try {
 								steps.remove(indexToDelete);
 							} catch (IndexOutOfBoundsException e) {
