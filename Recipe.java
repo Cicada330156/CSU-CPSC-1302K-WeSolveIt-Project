@@ -565,34 +565,34 @@ public class Recipe {
 	public String toString() {
 		String descriptor = "";
 		descriptor += "*** " + name + " ***";
-		descriptor += "\n";
+		descriptor += "\n\n";
 		descriptor += this.getTimeAsString();
-		descriptor += "\n";
+		descriptor += "\n\n";
 		if (servedHot) {
 			descriptor += "Served hot";
 		} else {
 			descriptor += "Served cold";
 		}
-		descriptor += "\n";
+		descriptor += "\n\n";
 		descriptor += description;
 		descriptor += "\n\n";
 		descriptor += "Tools required:";
-		descriptor += "\n";
+		descriptor += "\n\n";
 		for (int i = 0; i < requiredKitchenware.size(); i++) {
 			descriptor += requiredKitchenware.get(i);
-			descriptor += "\n";
+			descriptor += "\n\n";
 		}
 		descriptor += "Ingredients:";
 		descriptor += "\n";
 		for (int i = 0; i < ingredients.size(); i++) {
 			descriptor += ingredients.get(i);
-			descriptor += "\n";
+			descriptor += "\n\n";
 		}
 		descriptor += "Steps:";
 		descriptor += "\n";
 		for (int i = 0; i < steps.size(); i++) {
 			descriptor += (i + ")\t" + steps.get(i));
-			descriptor += "\n";
+			descriptor += "\n\n";
 		}
 		if (includes.size() < 0) {
 			descriptor += "\n\n\n";

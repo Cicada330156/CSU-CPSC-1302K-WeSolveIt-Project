@@ -8,6 +8,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+// case 2: inform user when their inputted recipe is not in recipe ArrayList
 public class RecipeBook {
 
 	public static void main(String[] args) {
@@ -75,9 +76,12 @@ public class RecipeBook {
 				case "2":
 					// option 2 code block edits an existing recipe object.
 					String twoSelect = "";
-					while (!twoSelect.equals("0")) {
-						System.out
-								.print("Enter the name of the recipe you would like to edit (or enter 0 to return): ");
+					while( ! twoSelect.equals( "0" )){
+						System.out.println("Current Recipes:");
+						for( Recipe rec : recipes ){
+							System.out.println( rec.getName());
+						}
+						System.out.print( "Enter the name of the recipe you would like to edit (or enter 0 to return): " );
 						twoSelect = echo.nextLine();
 						System.out.println("You entered " + twoSelect);
 						for (Recipe rec : recipes) {
@@ -85,7 +89,6 @@ public class RecipeBook {
 								rec.editRecipe(echo);
 							}
 						}
-						System.out.println("ERROR: Recipe not found.");
 					}
 					twoSelect = "";
 					break;

@@ -112,7 +112,7 @@ public class StovetopRecipe extends Recipe {
 
     // Options String
     protected final String OPTIONS = super.OPTIONS + "11) Edit stove temp\n" + //
-            "Edit pot type\n";
+            "12) Edit pot type\n";
 
     /**
      * Asks the user what they would like to edit, and changes it for them.
@@ -144,19 +144,19 @@ public class StovetopRecipe extends Recipe {
         switch (userInput) {
             case 11:
                 String newTemp = "";
-                while (newTemp.toLowerCase() != "lo" && newTemp.toLowerCase() != "med"
-                        && newTemp.toLowerCase() != "hi") {
+                while ( ! newTemp.toLowerCase().equals("lo") && ! newTemp.toLowerCase().equals("med")
+                        && ! newTemp.toLowerCase().equals("hi")) {
                     System.out.print("What would you like to change the temperature to? Enter [Lo], [Med], or [Hi]: ");
                     newTemp = stdin.nextLine();
                 }
-                System.out.println("Changing to " + newTemp + " degrees.");
+                System.out.println("Changing to " + newTemp + ".");
                 temp = newTemp;
                 break;
             case 12:
                 String newPotType = "";
                 System.out.print("What would you like to change the pot type to?");
                 newPotType = stdin.nextLine();
-                System.out.println("Changing to " + newPotType);
+                System.out.println("Changing to " + newPotType + ".");
                 potType = newPotType;
                 break;
             default:
