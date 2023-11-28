@@ -21,6 +21,7 @@ public class RecipeBook {
 		optionsMenu.add("2) Edit a recipe");
 		optionsMenu.add("3) List a recipe");
 		optionsMenu.add("4) List all recipes");
+		optionsMenu.add("5) Output recipes to a file");
 		optionsMenu.add("0) Quit");
 
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
@@ -105,7 +106,6 @@ public class RecipeBook {
 							break;
 						}
 					}
-					System.out.println("Not a recipe here.");
 					break;
 				case "4":
 					// option 4 code block displays all recipes.
@@ -116,8 +116,30 @@ public class RecipeBook {
 					}
 					System.out.println();
 					break;
+				case "5":
+					// option 5 code block outputs each recipe to a file
+					String fiveSelect = "";
+					while( ! fiveSelect.equalsIgnoreCase( "yes" ) || ! fiveSelect.equalsIgnoreCase( "no" )){
+						System.out.print( "Are you sure you want to write your current recipes to a file? (yes or no): ");
+						fiveSelect = echo.nextLine();
+						if( fiveSelect.equalsIgnoreCase( "no" )){
+							System.out.println( "Returning to main menu" );
+							break;
+						}	       
+						else if( fiveSelect.equalsIgnoreCase( "yes" )){
+							System.out.print( "Enter the name of the file you want to create and write to: " );
+							fiveSelect = echo.nextLine();
+						}
+						else{
+							System.out.println( "Sorry, not a valid option (yes or no)." );
+						}
+					}
+						break;
+				case "6":
+					//option 6 code block formats the recipe in JSON
+					break;
 				case "0":
-					// option 5 code block closes the program.
+					// option 7 code block closes the program.
 					System.out.println("Goodbye!");
 					break;
 				default:
