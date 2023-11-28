@@ -130,8 +130,34 @@ public class RecipeBook {
 							System.out.println("Returning to main menu");
 							break;
 						} else if (fiveSelect.equalsIgnoreCase("yes")) {
-							System.out.print("Enter the name of the file you want to create and write to: ");
+							System.out.print(
+									"Enter the name of the file you want to create and write to (do not include the extension): ");
 							fiveSelect = echo.nextLine();
+
+							if (!fiveSelect.endsWith(".txt")) {
+								fiveSelect += ".txt";
+							}
+
+							BufferedWriter recipesToFile = null;
+
+							try {
+								recipesToFile = new BufferedWriter(new FileWriter(fiveSelect));
+								for (Recipe fileRec : recipes) {
+									recipesToFile.write(fileRec.toString());
+									recipesToFile.newLine();
+								}
+							} catch (IOException e) {
+								e.printStackTrace();
+							} finally {
+								try {
+									if (recipesToFile != null) {
+										recipesToFile.close();
+									}
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+							break;
 						} else {
 							System.out.println("Sorry, not a valid option (yes or no).");
 						}
