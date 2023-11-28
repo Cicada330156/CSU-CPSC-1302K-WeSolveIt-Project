@@ -1,5 +1,5 @@
 import java.util.*;
-import java.io.*;
+//import java.io.*;
 
 import javax.json.*;
 
@@ -84,7 +84,7 @@ public class Recipe {
 			}
 			try {
 				for (JsonValue val : myJsonObj.getJsonArray("ingredients")) {
-					if (val.getValueType().equals("STRING")) {
+					if (val.getValueType().equals(JsonValue.ValueType.STRING)) {
 						ingredients.add(((JsonString) val).getString());
 					}
 				}
@@ -93,7 +93,7 @@ public class Recipe {
 			}
 			try {
 				for (JsonValue val : myJsonObj.getJsonArray("requiredKitchenware")) {
-					if (val.getValueType().equals("STRING")) {
+					if (val.getValueType().equals(JsonValue.ValueType.STRING)) {
 						requiredKitchenware.add(((JsonString) val).getString());
 					}
 				}
@@ -107,7 +107,7 @@ public class Recipe {
 			}
 			try {
 				for (JsonValue val : myJsonObj.getJsonArray("steps")) {
-					if (val.getValueType().equals("STRING")) {
+					if (val.getValueType().equals(JsonValue.ValueType.STRING)) {
 						steps.add(((JsonString) val).getString());
 					}
 				}
@@ -211,6 +211,9 @@ public class Recipe {
 	 */
 	public JsonObjectBuilder formatAsJSON() {
 		JsonObjectBuilder json = Json.createObjectBuilder();
+		if (debug) {
+			System.err.println("line 214 - created Object Builder");
+		}
 		json.add("recipeType", "Recipe");
 		json.add("name", name);
 		json.add("prepTime", prepTime);

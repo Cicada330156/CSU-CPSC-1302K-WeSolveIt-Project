@@ -1,6 +1,9 @@
 {
 	"java.project.referencedLibraries": [
 		"lib/**/*.jar",
-		"testingJSONParsing/javax.json-api-1.1.jar"
+		"javax.json-api-1.1.jar"
+	],
+	"java.project.sourcePaths": [
+		"."
 	]
 }
