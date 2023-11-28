@@ -248,13 +248,13 @@ public class BakingRecipe extends Recipe implements UsesOven {
 		descriptor += "\n";
 		for (int i = 0; i < requiredKitchenware.size(); i++) {
 			descriptor += requiredKitchenware.get(i);
-			descriptor += "\n\n";
+			descriptor += "\n";
 		}
 		descriptor += "Ingredients:";
 		descriptor += "\n";
 		for (int i = 0; i < ingredients.size(); i++) {
 			descriptor += ingredients.get(i);
-			descriptor += "\n\n";
+			descriptor += "\n";
 		}
 		if (preheat) {
 			descriptor += "Preheat oven to " + ovenTemp + " degrees";
