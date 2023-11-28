@@ -3,29 +3,48 @@ import java.util.Scanner;
 import javax.json.*;
 
 /**
- * In this class we will extend recipe, use instance variables, boolean, a grill
- * temp as well.
+ * In this class we will extend recipe, adding the instance variables preheat
+ * and grill temp as well.
  * Then we will use methods get or set variables and the override these methods.
  * 
  * @author Ryan McKelphin
  * @version 1.1
  */
 public class GrillRecipe extends Recipe {
+    // INSTANCE VARS
     private boolean preheat;
     private int grillTemp;
 
+    // CONSTRUCTORS
+    /**
+     * Constructs the object as in @see Recipe()
+     * sets preheat to true and grillTemp to a placeholder value of -1
+     */
     public GrillRecipe() {
         super();
         preheat = true;
         grillTemp = -1;
     }
 
+    /**
+     * Calls the parent Recipe(String name)
+     * sets preheat to true and grillTemp to a placeholder of -1
+     * 
+     * @param name the name of the new Recipe
+     */
     public GrillRecipe(String name) {
         super(name);
         preheat = true;
         grillTemp = -1;
     }
 
+    /**
+     * Instantiates the object based on its JsonObject representation
+     * 
+     * @throws javax.json.JsonException if the name does not load correctly. Else,
+     *                                  prints an error to console and moves on.
+     * @param JsonRepresentation the JsonObject representation of the object
+     */
     public GrillRecipe(JsonObject myJsonObj) {
         super(myJsonObj);
         try {
@@ -40,40 +59,48 @@ public class GrillRecipe extends Recipe {
         }
     }
 
-    // Getter and Setter methods
+    // GETTERS AND SETTERS
     /**
-     * This is where we use a get method for the preheat to return.
+     * Returns the value of the preheat variable
+     * 
+     * @return true if a preheated grill is needed, false if not
      */
     public boolean getPreheat() {
         return this.preheat;
     }
 
     /**
-     * This is where we use a set method for the preheat as a boolean.
+     * Sets the preheat variable
+     * 
+     * @param preheat whether or not the user should preheat the oven
      */
     public void setPreheat(boolean preheat) {
         this.preheat = preheat;
     }
 
     /**
-     * This is where we use a get method for the grillTemp to return.
+     * Returns the temperature to set the grill to
+     * 
+     * @return the temperature which the grill should be set to
      */
     public int getGrillTemp() {
         return this.grillTemp;
     }
 
     /**
-     * This is where we use a set method for the grillTemp to set as a int.
+     * Sets the grill temp to be used
+     * 
+     * @param the required temperature
      */
     public void setGrillTemp(int grillTemp) {
         this.grillTemp = grillTemp;
     }
 
-    // Overridden methods
-    // Method to format the object as JSON
+    // OVERRIDDEN METHODS
     /**
-     * this is were we format a String as a JSON and return them with preheat and
-     * even the grillTemp.
+     * Formats the values of the object in the JSON format
+     * 
+     * @return this object, stored in the JSON format
      */
     public JsonObjectBuilder formatAsJSON() {
         JsonObjectBuilder json = super.formatAsJSON();
@@ -83,22 +110,16 @@ public class GrillRecipe extends Recipe {
         return json;
     }
 
-    /**
-     * Method to edit the recipe
-     * We are going to edit the Recipe to the boolean preheat and the int grillTemp.
-     */
-    public void editRecipe(boolean preheat, int grillTemp) {
-        this.preheat = preheat;
-        this.grillTemp = grillTemp;
-    }
-
     // Options String
     protected final String OPTIONS = super.OPTIONS + "11) Edit preheat boolean\n" + //
             "12) Edit grill temp\n";
 
     /**
-     * Method to edit the recipe
-     * We are going to edit the Recipe to the boolean preheat and the int grillTemp.
+     * Asks the user what they would like to edit, and changes it for them.
+     * Continues looping back to the menu unless indicated otherwise
+     * 
+     * @param stdin the scanner to use
+     * @return true if all was successful, false if there was an error
      */
     public void editRecipe(Scanner stdin) {
         int userInput = 0;
@@ -161,10 +182,10 @@ public class GrillRecipe extends Recipe {
     }
 
     /**
-     * this is where we override the equals object and use if statements for the
-     * grillTemp and also other classes as well
-     * we will use the @Override the equals boolean to have return equals,
-     * StovetopRecipe and use if statements as well
+     * checks if this recipe is equal to another object
+     * 
+     * @param otherRecipe the other recipe to compare to
+     * @return true if the two are the same, false if not
      */
     @Override
     public boolean equals(Object compareTo) {
@@ -202,8 +223,10 @@ public class GrillRecipe extends Recipe {
     }
 
     /**
-     * this is where we override the toString method for the return of a grillRecipe
-     * array.
+     * returns a String representation of the object, formatted as to be displayed
+     * to the end user.
+     * 
+     * @return the String representation of this recipe
      */
     @Override
     public String toString() {

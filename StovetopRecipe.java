@@ -10,21 +10,40 @@ import javax.json.*;
  */
 
 public class StovetopRecipe extends Recipe {
+    // INSTANCE VARS
     private String temp;
     private String potType;
 
+    // CONSTRUCTORS
+    /**
+     * Constructs the object as in @see Recipe()
+     * sets preheat to true and grillTemp to a placeholder value of -1
+     */
     public StovetopRecipe() {
         super();
         temp = "";
         potType = "";
     }
 
+    /**
+     * Calls the parent Recipe(String name)
+     * sets preheat to true and grillTemp to a placeholder of -1
+     * 
+     * @param name the name of the new Recipe
+     */
     public StovetopRecipe(String name) {
         super(name);
         temp = "";
         potType = "";
     }
 
+    /**
+     * Instantiates the object based on its JsonObject representation
+     * 
+     * @throws javax.json.JsonException if the name does not load correctly. Else,
+     *                                  prints an error to console and moves on.
+     * @param JsonRepresentation the JsonObject representation of the object
+     */
     public StovetopRecipe(JsonObject myJsonObj) {
         super(myJsonObj);
         try {
@@ -39,30 +58,38 @@ public class StovetopRecipe extends Recipe {
         }
     }
 
-    // Getters and Setters
+    // GETTERS AND SETTERS
     /**
-     * We will use the get method to use the getTemp to return the temp.
+     * Returns the stove temp
+     * 
+     * @return a string representing the stove's set temperature
      */
     public String getTemp() {
         return temp;
     }
 
     /**
-     * We will use the set method to use the set the temp.
+     * Sets the recommended temperature of the stove
+     * 
+     * @param the temperature to be set
      */
     public void setTemp(String temp) {
         this.temp = temp;
     }
 
     /**
-     * We will use the get method to use the getPotType to return the potType.
+     * Returns the intended type of pot for this recipe
+     * 
+     * @return the type of pot to be used
      */
     public String getPotType() {
         return potType;
     }
 
     /**
-     * We will use the set method to use the setPotType for a stringpotType.
+     * Sets the intended pot type for this recipe
+     * 
+     * @param the pot type to be used
      */
     public void setPotType(String potType) {
         this.potType = potType;
@@ -70,8 +97,9 @@ public class StovetopRecipe extends Recipe {
 
     // Overridden Methods VVV
     /**
-     * we will override this method and use the object method to use the JSON for
-     * super and put to get to use the json.
+     * Formats the values of the object in the JSON format
+     * 
+     * @return this object, stored in the JSON format
      */
     @Override
     public JsonObjectBuilder formatAsJSON() {
@@ -80,16 +108,6 @@ public class StovetopRecipe extends Recipe {
         json.add("temp", temp);
         json.add("potType", potType);
         return json;
-    }
-
-    /**
-     * we will use the editRecipe to get the name,temp, and potType as the strings
-     * and display them.
-     */
-    public void editRecipe(String name, String temp, String potType) {
-        super.name = name;
-        setTemp(temp);
-        setPotType(potType);
     }
 
     // Options String
@@ -148,8 +166,10 @@ public class StovetopRecipe extends Recipe {
     }
 
     /**
-     * we will use the @Override the equals boolean to have return equals,
-     * StovetopRecipe and use if statements as well
+     * checks if this recipe is equal to another object
+     * 
+     * @param otherRecipe the other recipe to compare to
+     * @return true if the two are the same, false if not
      */
     @Override
     public boolean equals(Object compareTo) {
@@ -187,8 +207,10 @@ public class StovetopRecipe extends Recipe {
     }
 
     /**
-     * We will override the toString to have temp and pottype with returning the
-     * super.toStrint().
+     * returns a String representation of the object, formatted as to be displayed
+     * to the end user.
+     * 
+     * @return the String representation of this recipe
      */
     @Override
     public String toString() {
